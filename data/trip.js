@@ -1,0 +1,2153 @@
+export const tripData = {
+  "version": "r2-p12",
+  "trip": {
+    "id": "kansai-adventure-2026",
+    "title": "Kansai Adventure",
+    "subtitle": "Kyoto × Osaka • 16-bit Autumn Trip",
+    "year": 2026,
+    "startDate": "2026-11-30",
+    "endDate": "2026-12-19",
+    "timezone": "Asia/Tokyo",
+    "currency": "JPY",
+    "secondaryCurrency": "PHP"
+  },
+  "parts": [
+    {
+      "id": "part1",
+      "title": "Part 1 — The Navis",
+      "shortTitle": "The Navis",
+      "startDate": "2026-11-30",
+      "endDate": "2026-12-05",
+      "description": "Osaka first, followed by Kyoto.",
+      "days": [
+        {
+          "date": "2026-11-30",
+          "city": "Osaka",
+          "title": "Osaka Arrival",
+          "subtitle": "Arrival → Shinsekai → Umeda",
+          "stops": [
+            {
+              "placeId": "kix",
+              "type": "arrival",
+              "title": "Flight arrival — Manila → Osaka",
+              "note": "Philippine Airlines PR 412 · 09:10 MNL → 13:45 KIX · nonstop · 3h 35min",
+              "status": "confirmed",
+              "flight": {
+                "airline": "Philippine Airlines",
+                "flightNumber": "PR 412",
+                "direction": "arrival",
+                "from": "MNL",
+                "to": "KIX",
+                "departure": "09:10",
+                "arrival": "13:45",
+                "duration": "3h 35min",
+                "service": "nonstop",
+                "travelerGroup": "The Navis"
+              }
+            },
+            {
+              "placeId": "koko-hotel-shinsekai",
+              "type": "hotel",
+              "title": "Check in",
+              "note": "KOKO HOTEL Osaka Shinsekai"
+            },
+            {
+              "placeId": "umeda-sky-building",
+              "type": "attraction",
+              "title": "Umeda Sky Building"
+            },
+            {
+              "placeId": "moeyo-mensuke",
+              "type": "food",
+              "title": "Dinner — Moeyo Mensuke",
+              "alternative": "Hanamaruken"
+            }
+          ],
+          "travelerGroup": "The Navis",
+          "travelers": [
+            "Carlos",
+            "Isay"
+          ]
+        },
+        {
+          "date": "2026-12-01",
+          "city": "Osaka",
+          "title": "Tennoji + Minoh",
+          "subtitle": "Zoo → Abeno → Minoh",
+          "stops": [
+            {
+              "placeId": "tennoji-zoo",
+              "type": "attraction",
+              "title": "Tennoji Zoo & Park"
+            },
+            {
+              "placeId": "gosakudon",
+              "type": "food",
+              "title": "Gosakudon Seafood Izakaya"
+            },
+            {
+              "placeId": "loft-abeno",
+              "type": "shopping",
+              "title": "Loft Abeno"
+            },
+            {
+              "placeId": "minoh-park",
+              "type": "attraction",
+              "title": "Minoh Park & Minoh Falls"
+            }
+          ],
+          "travelerGroup": "The Navis",
+          "travelers": [
+            "Carlos",
+            "Isay"
+          ]
+        },
+        {
+          "date": "2026-12-02",
+          "city": "Osaka",
+          "title": "Umeda + Osaka Castle",
+          "subtitle": "Breakfast → shopping → castle → park option",
+          "stops": [
+            {
+              "placeId": "sunshine",
+              "type": "food",
+              "title": "Breakfast at Sunshine"
+            },
+            {
+              "placeId": "loft-umeda",
+              "type": "shopping",
+              "title": "Loft Umeda"
+            },
+            {
+              "placeId": "osaka-castle",
+              "type": "attraction",
+              "title": "Osaka Castle"
+            },
+            {
+              "placeId": "park-option",
+              "type": "choice",
+              "title": "Choose a park",
+              "options": [
+                "Maishima Ryokuchi Park",
+                "Hattori Ryokuchi Park",
+                "Expo '70 Commemorative Park"
+              ]
+            }
+          ],
+          "travelerGroup": "The Navis",
+          "travelers": [
+            "Carlos",
+            "Isay"
+          ]
+        },
+        {
+          "date": "2026-12-03",
+          "city": "Kyoto",
+          "title": "Arashiyama Adventure",
+          "subtitle": "Bridge → bamboo → preserved street → temples",
+          "stops": [
+            {
+              "placeId": "togetsukyo-bridge",
+              "type": "attraction",
+              "title": "Togetsukyo Bridge"
+            },
+            {
+              "placeId": "arashiyama-bamboo-grove",
+              "type": "attraction",
+              "title": "Arashiyama Bamboo Grove"
+            },
+            {
+              "placeId": "saga-toriimoto",
+              "type": "attraction",
+              "title": "Saga Toriimoto Preserved Street"
+            },
+            {
+              "placeId": "otagi-nenbutsuji",
+              "type": "attraction",
+              "title": "Otagi Nenbutsu-ji Temple"
+            },
+            {
+              "placeId": "adashino-nenbutsuji",
+              "type": "attraction",
+              "title": "Adashino Nenbutsu-ji Temple"
+            },
+            {
+              "placeId": "kimono-forest",
+              "type": "attraction",
+              "title": "Kimono Forest"
+            }
+          ],
+          "travelerGroup": "The Navis",
+          "travelers": [
+            "Carlos",
+            "Isay"
+          ]
+        },
+        {
+          "date": "2026-12-04",
+          "city": "Kyoto",
+          "title": "Central Kyoto",
+          "subtitle": "Castle + manga",
+          "stops": [
+            {
+              "placeId": "nijo-castle",
+              "type": "attraction",
+              "title": "Nijo-jo Castle"
+            },
+            {
+              "placeId": "kyoto-manga-museum",
+              "type": "attraction",
+              "title": "Kyoto International Manga Museum"
+            }
+          ],
+          "travelerGroup": "The Navis",
+          "travelers": [
+            "Carlos",
+            "Isay"
+          ]
+        },
+        {
+          "date": "2026-12-05",
+          "city": "Kyoto",
+          "title": "Kyoto Garden + Transition",
+          "subtitle": "Garden/botanical option → transition to Part 2",
+          "stops": [
+            {
+              "placeId": "kyoto-garden",
+              "type": "choice",
+              "title": "Kyoto Gyoen / Kyoto Botanical Garden"
+            },
+            {
+              "placeId": "part1-end",
+              "type": "transition",
+              "title": "End of Part 1"
+            }
+          ],
+          "travelerGroup": "The Navis",
+          "travelers": [
+            "Carlos",
+            "Isay"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part2",
+      "title": "Part 2 — Group",
+      "shortTitle": "Group",
+      "startDate": "2026-12-05",
+      "endDate": "2026-12-19",
+      "description": "Friends itinerary from the supplied Wanderlog/PDF itinerary. Georgia, Raph, and Arth remain in Japan from Dec 12 onward after Carlos and Isay (The Navis) return to Manila.",
+      "sourceNote": "Source itinerary covers Dec 5–19, 2026. Dec 15–19 are explicitly open/unplanned in the supplied itinerary.",
+      "days": [
+        {
+          "date": "2026-12-05",
+          "city": "Kyoto",
+          "title": "Arrive in Kyoto",
+          "subtitle": "Kansai Airport → Kyoto → Gion / Kawaramachi",
+          "stops": [
+            {
+              "placeId": "kix",
+              "type": "arrival",
+              "title": "Kansai International Airport"
+            },
+            {
+              "placeId": "kyoto-station",
+              "type": "transit",
+              "title": "Kyoto Station"
+            },
+            {
+              "placeId": "55-yumiyacho",
+              "type": "hotel",
+              "title": "55 Yumiyachō — Kyoto base",
+              "note": "Check-in listed at 3:00 PM"
+            },
+            {
+              "placeId": "bookoff-kawaramachi-opa",
+              "type": "shopping",
+              "title": "BOOKOFF PLUS Kawaramachi OPA"
+            },
+            {
+              "placeId": "surugaya-kyoto-teramachi",
+              "type": "shopping",
+              "title": "SURUGA-YA Kyoto Teramachi Store"
+            },
+            {
+              "placeId": "menya-inoichi",
+              "type": "food",
+              "title": "Men-ya Inoichi"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Carlos",
+            "Isay",
+            "Georgia",
+            "Raph",
+            "Arth"
+          ]
+        },
+        {
+          "date": "2026-12-06",
+          "city": "Kyoto / Osaka edge",
+          "title": "Hirakata Park + Nintendo",
+          "subtitle": "Theme park morning → Nintendo afternoon",
+          "stops": [
+            {
+              "placeId": "cafe-roji-usagi",
+              "type": "food",
+              "title": "Cafe Roji-Usagi",
+              "note": "Breakfast"
+            },
+            {
+              "placeId": "hirakata-park",
+              "type": "attraction",
+              "title": "Hirakata Park"
+            },
+            {
+              "placeId": "nintendo-kyoto",
+              "type": "shopping",
+              "title": "Nintendo KYOTO"
+            },
+            {
+              "placeId": "nuunu-kyoto",
+              "type": "shopping",
+              "title": "Nuunu Kyoto"
+            },
+            {
+              "placeId": "mandarake-kyoto",
+              "type": "shopping",
+              "title": "Mandarake Kyoto"
+            },
+            {
+              "placeId": "b-side-label-kyoto",
+              "type": "shopping",
+              "title": "B-SIDE LABEL Kyoto Store"
+            },
+            {
+              "placeId": "honeys-kyoto",
+              "type": "shopping",
+              "title": "Honeys"
+            },
+            {
+              "placeId": "sumiyaki-unafuji-kyoto",
+              "type": "food",
+              "title": "Sumiyaki Unafuji Daimaru Kyoto Bettei"
+            },
+            {
+              "placeId": "nintendo-museum",
+              "type": "attraction",
+              "title": "Nintendo Museum"
+            },
+            {
+              "placeId": "gigo-kawaramachi-opa",
+              "type": "shopping",
+              "title": "Gigo — Kawaramachi OPA"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Carlos",
+            "Isay",
+            "Georgia",
+            "Raph",
+            "Arth"
+          ]
+        },
+        {
+          "date": "2026-12-07",
+          "city": "Kyoto",
+          "title": "Kimono + Gion",
+          "subtitle": "Kimono morning → Gion / Yasaka → shopping",
+          "stops": [
+            {
+              "placeId": "andot-kyoto",
+              "type": "experience",
+              "title": "andot Kyoto kimono rental",
+              "status": "booked",
+              "note": "10:00 AM–4:30 PM window listed"
+            },
+            {
+              "placeId": "zenkyo-an",
+              "type": "attraction",
+              "title": "Zenkyo-an Temple"
+            },
+            {
+              "placeId": "yasaka-shrine",
+              "type": "attraction",
+              "title": "Yasaka Shrine"
+            },
+            {
+              "placeId": "jizo-do-kyoto",
+              "type": "shopping",
+              "title": "京都 JIZO堂"
+            },
+            {
+              "placeId": "kasokeki",
+              "type": "shopping",
+              "title": "KASOKEKI gift shop"
+            },
+            {
+              "placeId": "gu-mina-kyoto",
+              "type": "shopping",
+              "title": "GU Mina-Kyoto"
+            },
+            {
+              "placeId": "editmode",
+              "type": "shopping",
+              "title": "EDITMODE"
+            },
+            {
+              "placeId": "nintendo-museum",
+              "type": "attraction",
+              "title": "Nintendo Museum"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Carlos",
+            "Isay",
+            "Georgia",
+            "Raph",
+            "Arth"
+          ]
+        },
+        {
+          "date": "2026-12-08",
+          "city": "Kyoto → Osaka",
+          "title": "Move Day",
+          "subtitle": "Kyoto checkout → aquarium → Nipponbashi → Dotonbori",
+          "stops": [
+            {
+              "placeId": "55-yumiyacho",
+              "type": "hotel",
+              "title": "55 Yumiyachō — check out"
+            },
+            {
+              "placeId": "kyoto-aquarium",
+              "type": "attraction",
+              "title": "Kyoto Aquarium"
+            },
+            {
+              "placeId": "kyoto-station",
+              "type": "transit",
+              "title": "Kyoto Station"
+            },
+            {
+              "placeId": "nippombashi-station",
+              "type": "transit",
+              "title": "Nippombashi Station"
+            },
+            {
+              "placeId": "machiya-hotel",
+              "type": "hotel",
+              "title": "MACHIYA HOTEL — Osaka base",
+              "note": "Check-in"
+            },
+            {
+              "placeId": "gyomu-super-kozu",
+              "type": "shopping",
+              "title": "Gyomu Super Kozu"
+            },
+            {
+              "placeId": "dotonbori",
+              "type": "attraction",
+              "title": "Dotonbori"
+            },
+            {
+              "placeId": "shinsaibashi-parco",
+              "type": "shopping",
+              "title": "Shinsaibashi PARCO"
+            },
+            {
+              "placeId": "surugaya-nipponbashi-otomekan",
+              "type": "shopping",
+              "title": "Surugaya Nipponbashi Otomekan"
+            },
+            {
+              "placeId": "yakiniku-hanamichi",
+              "type": "food",
+              "title": "Yakiniku Hanamichi"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Carlos",
+            "Isay",
+            "Georgia",
+            "Raph",
+            "Arth"
+          ]
+        },
+        {
+          "date": "2026-12-09",
+          "city": "Osaka",
+          "title": "USJ + Hozenji",
+          "subtitle": "Universal Studios Japan → Hozenji → food",
+          "stops": [
+            {
+              "placeId": "universal-studios-japan",
+              "type": "attraction",
+              "title": "Universal Studios Japan"
+            },
+            {
+              "placeId": "hozenji",
+              "type": "attraction",
+              "title": "Hozen-ji"
+            },
+            {
+              "placeId": "okonomiyaki-houzenji-sanpei",
+              "type": "food",
+              "title": "Okonomiyaki Houzenji Sanpei"
+            },
+            {
+              "placeId": "mugen-ramen",
+              "type": "food",
+              "title": "Mugen Ramen"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Carlos",
+            "Isay",
+            "Georgia",
+            "Raph",
+            "Arth"
+          ]
+        },
+        {
+          "date": "2026-12-10",
+          "city": "Osaka",
+          "title": "Kuromon + Den-Den + Shinsekai",
+          "subtitle": "Market → retro/anime → Shinsekai",
+          "stops": [
+            {
+              "placeId": "kuromon-market",
+              "type": "attraction",
+              "title": "Kuromon Market"
+            },
+            {
+              "placeId": "ourlog-coffee-honmachi",
+              "type": "food",
+              "title": "Ourlog Coffee Honmachi"
+            },
+            {
+              "placeId": "nipponbashi-denden-town",
+              "type": "shopping",
+              "title": "Nipponbashi Denden Town"
+            },
+            {
+              "placeId": "super-potato-ota-road",
+              "type": "shopping",
+              "title": "Super Potato Retrokan Ota Road Branch"
+            },
+            {
+              "placeId": "surugaya-ota-road",
+              "type": "shopping",
+              "title": "SURUGA-YA Ota-Road Anime and Hobby Store"
+            },
+            {
+              "placeId": "k-books-namba-ichibankan",
+              "type": "shopping",
+              "title": "K-books Namba-ichibankan"
+            },
+            {
+              "placeId": "sakimoto-bakery",
+              "type": "food",
+              "title": "SAKImoto bakery"
+            },
+            {
+              "placeId": "shinsekai",
+              "type": "attraction",
+              "title": "Shinsekai"
+            },
+            {
+              "placeId": "tsutenkaku",
+              "type": "attraction",
+              "title": "Tsutenkaku"
+            },
+            {
+              "placeId": "kushiyakiyatai",
+              "type": "food",
+              "title": "Kushiyakiyatai Tsuruhashiotokogushi"
+            },
+            {
+              "placeId": "round1-sennichimae",
+              "type": "entertainment",
+              "title": "Round1 Stadium Sennichimae"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Carlos",
+            "Isay",
+            "Georgia",
+            "Raph",
+            "Arth"
+          ]
+        },
+        {
+          "date": "2026-12-11",
+          "city": "Osaka",
+          "title": "Otaku / Exhibition / Café Loop",
+          "subtitle": "Flexible Osaka day",
+          "stops": [
+            {
+              "placeId": "gee-store-osaka",
+              "type": "shopping",
+              "title": "Gee Store Osaka"
+            },
+            {
+              "placeId": "marmot-village",
+              "type": "shopping",
+              "title": "Marmot Village"
+            },
+            {
+              "placeId": "kuromon-market",
+              "type": "attraction",
+              "title": "Kuromon Market",
+              "note": "Breakfast"
+            },
+            {
+              "placeId": "u-arts",
+              "type": "shopping",
+              "title": "U-ARTS"
+            },
+            {
+              "placeId": "tsukitoh",
+              "type": "shopping",
+              "title": "月盗"
+            },
+            {
+              "placeId": "marmot-cafe",
+              "type": "food",
+              "title": "マーモットカフェ マーモット村大阪"
+            },
+            {
+              "placeId": "dogyan",
+              "type": "food",
+              "title": "Dogyan"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Carlos",
+            "Isay",
+            "Georgia",
+            "Raph",
+            "Arth"
+          ]
+        },
+        {
+          "date": "2026-12-12",
+          "city": "Osaka",
+          "title": "Kuromon + Abeno + Namba",
+          "subtitle": "Market → Abeno → Dotonbori / Namba",
+          "stops": [
+            {
+              "placeId": "kix",
+              "type": "arrival",
+              "title": "Flight departure — Osaka → Manila",
+              "note": "Philippine Airlines PR 407 · 10:05 KIX → 13:35 MNL · nonstop · 4h 30min",
+              "status": "confirmed",
+              "flight": {
+                "airline": "Philippine Airlines",
+                "flightNumber": "PR 407",
+                "direction": "departure",
+                "from": "KIX",
+                "to": "MNL",
+                "departure": "10:05",
+                "arrival": "13:35",
+                "duration": "4h 30min",
+                "service": "nonstop",
+                "travelerGroup": "The Navis"
+              }
+            },
+            {
+              "placeId": "kuromon-market",
+              "type": "attraction",
+              "title": "Kuromon Market"
+            },
+            {
+              "placeId": "kuromonmaru",
+              "type": "shopping",
+              "title": "#kuromonmaru"
+            },
+            {
+              "placeId": "capcomix-abeno-hoop",
+              "type": "shopping",
+              "title": "CAPCOMIX Abeno Hoop"
+            },
+            {
+              "placeId": "sur-pla-dotonbori",
+              "type": "entertainment",
+              "title": "サープラ大阪道頓堀あそびタウン"
+            },
+            {
+              "placeId": "sekai-no-yamachan",
+              "type": "food",
+              "title": "Sekai no Yamachan Sennichimae"
+            },
+            {
+              "placeId": "tempura-makino-namba",
+              "type": "food",
+              "title": "Tempura Makino Namba"
+            }
+          ],
+          "travelerGroup": "Group continues · The Navis depart",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan.",
+          "navisDeparture": "PR 407 · 10:05 KIX → 13:35 MNL"
+        },
+        {
+          "date": "2026-12-13",
+          "city": "Osaka",
+          "title": "Namba + Umeda",
+          "subtitle": "Checkout → shopping → final dinner",
+          "stops": [
+            {
+              "placeId": "machiya-hotel",
+              "type": "hotel",
+              "title": "MACHIYA HOTEL — check out"
+            },
+            {
+              "placeId": "tonkatsu-new-babe",
+              "type": "food",
+              "title": "Tonkatsu New Babe Namba"
+            },
+            {
+              "placeId": "nerd-room",
+              "type": "shopping",
+              "title": "NERD ROOM"
+            },
+            {
+              "placeId": "tokito",
+              "type": "food",
+              "title": "と木と (tokito)"
+            },
+            {
+              "placeId": "sumiyaki-unafuji-umeda",
+              "type": "food",
+              "title": "Sumiyaki Unafuji Osaka Umeda Store"
+            },
+            {
+              "placeId": "kiddy-land-umeda",
+              "type": "shopping",
+              "title": "Kiddy Land Osaka Umeda"
+            },
+            {
+              "placeId": "hep-five",
+              "type": "shopping",
+              "title": "HEP FIVE"
+            },
+            {
+              "placeId": "honeys-namba-walk",
+              "type": "shopping",
+              "title": "HONEYS Namba Walk Store"
+            },
+            {
+              "placeId": "nikusakana-umeda",
+              "type": "food",
+              "title": "Yakiniku and seafood Nikusakana Umeda Higashidori"
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan."
+        },
+        {
+          "date": "2026-12-14",
+          "city": "Osaka",
+          "title": "Buffet + Open Window",
+          "subtitle": "One fixed lunch; otherwise flexible",
+          "stops": [
+            {
+              "placeId": "shinsaibashi-maruhana",
+              "type": "food",
+              "title": "Japanese Buffet Dining Shinsaibashi Maruhana",
+              "note": "Lunch only; consider booking ahead",
+              "priceJPY": 7500
+            }
+          ],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan."
+        },
+        {
+          "date": "2026-12-15",
+          "city": "Flexible",
+          "title": "Open Day",
+          "subtitle": "No stops recorded in the supplied itinerary",
+          "status": "open",
+          "stops": [],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan."
+        },
+        {
+          "date": "2026-12-16",
+          "city": "Flexible",
+          "title": "Open Day",
+          "subtitle": "No stops recorded in the supplied itinerary",
+          "status": "open",
+          "stops": [],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan."
+        },
+        {
+          "date": "2026-12-17",
+          "city": "Flexible",
+          "title": "Open Day",
+          "subtitle": "No stops recorded in the supplied itinerary",
+          "status": "open",
+          "stops": [],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan."
+        },
+        {
+          "date": "2026-12-18",
+          "city": "Flexible",
+          "title": "Open Day",
+          "subtitle": "No stops recorded in the supplied itinerary",
+          "status": "open",
+          "stops": [],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan."
+        },
+        {
+          "date": "2026-12-19",
+          "city": "Flexible",
+          "title": "Open Day",
+          "subtitle": "No stops recorded in the supplied itinerary",
+          "status": "open",
+          "stops": [],
+          "travelerGroup": "Group",
+          "travelers": [
+            "Georgia",
+            "Raph",
+            "Arth"
+          ],
+          "navisStatus": "Carlos and Isay (The Navis) return to Manila on Dec 12; the remaining group continues in Japan."
+        }
+      ],
+      "travelerNote": "From Dec 12 onward, the remaining group is Georgia, Raph, and Arth. Carlos and Isay (The Navis) depart Osaka on PR 407 and return to Manila."
+    }
+  ],
+  "places": [
+    {
+      "id": "koko-hotel-shinsekai",
+      "name": "KOKO HOTEL Osaka Shinsekai",
+      "category": "hotel",
+      "city": "Osaka",
+      "part": "part1",
+      "source": "user-itinerary",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-11-30"
+      ]
+    },
+    {
+      "id": "55-yumiyacho",
+      "name": "55 Yumiyachō",
+      "category": "hotel",
+      "city": "Kyoto",
+      "part": "part2",
+      "source": "wanderlog",
+      "links": {},
+      "usageCount": 2,
+      "itineraryDates": [
+        "2026-12-05",
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "machiya-hotel",
+      "name": "MACHIYA HOTEL",
+      "category": "hotel",
+      "city": "Osaka",
+      "part": "part2",
+      "source": "wanderlog",
+      "links": {},
+      "usageCount": 2,
+      "itineraryDates": [
+        "2026-12-08",
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "kix",
+      "name": "Kansai International Airport",
+      "category": "airport",
+      "city": "Osaka",
+      "part": "shared",
+      "links": {},
+      "usageCount": 2,
+      "itineraryDates": [
+        "2026-11-30",
+        "2026-12-05"
+      ]
+    },
+    {
+      "id": "umeda-sky-building",
+      "name": "Umeda Sky Building",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-11-30"
+      ]
+    },
+    {
+      "id": "moeyo-mensuke",
+      "name": "Moeyo Mensuke",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-11-30"
+      ]
+    },
+    {
+      "id": "hanamaruken",
+      "name": "Hanamaruken",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 0,
+      "itineraryDates": []
+    },
+    {
+      "id": "tennoji-zoo",
+      "name": "Tennoji Zoo & Park",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "gosakudon",
+      "name": "Gosakudon Seafood Izakaya",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "loft-abeno",
+      "name": "Loft Abeno",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "minoh-park",
+      "name": "Minoh Park & Minoh Falls",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "sunshine",
+      "name": "Sunshine",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-02"
+      ]
+    },
+    {
+      "id": "loft-umeda",
+      "name": "Loft Umeda",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-02"
+      ]
+    },
+    {
+      "id": "osaka-castle",
+      "name": "Osaka Castle",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-02"
+      ],
+      "location": {
+        "lat": 34.6873153,
+        "lng": 135.5262013,
+        "address": "1-1 Osakajo, Chuo-ku, Osaka 540-0002, Japan",
+        "verification": "Official Osaka Castle address; coordinate reference cross-checked with published location data.",
+        "mapsQuery": "https://www.google.com/maps/search/?api=1&query=34.6873153,135.5262013"
+      }
+    },
+    {
+      "id": "park-option",
+      "name": "Park choice — Maishima / Hattori Ryokuchi / Expo '70",
+      "category": "choice",
+      "city": "Osaka",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-02"
+      ]
+    },
+    {
+      "id": "togetsukyo-bridge",
+      "name": "Togetsukyo Bridge",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-03"
+      ]
+    },
+    {
+      "id": "arashiyama-bamboo-grove",
+      "name": "Arashiyama Bamboo Grove",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-03"
+      ]
+    },
+    {
+      "id": "saga-toriimoto",
+      "name": "Saga Toriimoto Preserved Street",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-03"
+      ]
+    },
+    {
+      "id": "otagi-nenbutsuji",
+      "name": "Otagi Nenbutsu-ji Temple",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-03"
+      ]
+    },
+    {
+      "id": "adashino-nenbutsuji",
+      "name": "Adashino Nenbutsu-ji Temple",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-03"
+      ]
+    },
+    {
+      "id": "kimono-forest",
+      "name": "Kimono Forest",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-03"
+      ]
+    },
+    {
+      "id": "nijo-castle",
+      "name": "Nijo-jo Castle",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "kyoto-manga-museum",
+      "name": "Kyoto International Manga Museum",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "kyoto-garden",
+      "name": "Kyoto Gyoen / Kyoto Botanical Garden",
+      "category": "choice",
+      "city": "Kyoto",
+      "part": "part1",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-05"
+      ]
+    },
+    {
+      "id": "kyoto-station",
+      "name": "Kyoto Station",
+      "category": "transit",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 2,
+      "itineraryDates": [
+        "2026-12-05",
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "bookoff-kawaramachi-opa",
+      "name": "BOOKOFF PLUS Kawaramachi OPA",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-05"
+      ]
+    },
+    {
+      "id": "surugaya-kyoto-teramachi",
+      "name": "SURUGA-YA Kyoto Teramachi Store",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-05"
+      ]
+    },
+    {
+      "id": "menya-inoichi",
+      "name": "Men-ya Inoichi",
+      "category": "food",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-05"
+      ]
+    },
+    {
+      "id": "cafe-roji-usagi",
+      "name": "Cafe Roji-Usagi",
+      "category": "food",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "hirakata-park",
+      "name": "Hirakata Park",
+      "category": "attraction",
+      "city": "Hirakata",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "nintendo-kyoto",
+      "name": "Nintendo KYOTO",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "nuunu-kyoto",
+      "name": "Nuunu Kyoto",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "mandarake-kyoto",
+      "name": "Mandarake Kyoto",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "b-side-label-kyoto",
+      "name": "B-SIDE LABEL Kyoto Store",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "honeys-kyoto",
+      "name": "Honeys",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "sumiyaki-unafuji-kyoto",
+      "name": "Sumiyaki Unafuji Daimaru Kyoto Bettei",
+      "category": "food",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "nintendo-museum",
+      "name": "Nintendo Museum",
+      "category": "attraction",
+      "city": "Uji",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 3300,
+      "usageCount": 2,
+      "itineraryDates": [
+        "2026-12-06",
+        "2026-12-07"
+      ],
+      "location": {
+        "lat": 34.89278,
+        "lng": 135.78417,
+        "address": "56 Kaguraden, Ogura-cho, Uji-shi, Kyoto 611-0042, Japan",
+        "verification": "Official Nintendo Museum access page; coordinate reference from Wikimedia Commons map data.",
+        "mapsQuery": "https://www.google.com/maps/search/?api=1&query=34.89278,135.78417"
+      }
+    },
+    {
+      "id": "gigo-kawaramachi-opa",
+      "name": "Gigo — Kawaramachi OPA",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "andot-kyoto",
+      "name": "andot Kyoto kimono rental",
+      "category": "experience",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "zenkyo-an",
+      "name": "Zenkyo-an Temple",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "yasaka-shrine",
+      "name": "Yasaka Shrine",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "jizo-do-kyoto",
+      "name": "京都 JIZO堂",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "kasokeki",
+      "name": "KASOKEKI",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "gu-mina-kyoto",
+      "name": "GU Mina-Kyoto",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "editmode",
+      "name": "EDITMODE",
+      "category": "shopping",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "kyoto-aquarium",
+      "name": "Kyoto Aquarium",
+      "category": "attraction",
+      "city": "Kyoto",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 2600,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "nippombashi-station",
+      "name": "Nippombashi Station",
+      "category": "transit",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "gyomu-super-kozu",
+      "name": "Gyomu Super Kozu",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "dotonbori",
+      "name": "Dotonbori",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "shinsaibashi-parco",
+      "name": "Shinsaibashi PARCO",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "surugaya-nipponbashi-otomekan",
+      "name": "Surugaya Nipponbashi Otomekan",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "yakiniku-hanamichi",
+      "name": "Yakiniku Hanamichi",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 7260,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "universal-studios-japan",
+      "name": "Universal Studios Japan",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 8400,
+      "priceNote": "Starting reference price; date-dependent",
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-09"
+      ],
+      "location": {
+        "lat": 34.6655,
+        "lng": 135.4323,
+        "address": "2-1-33 Sakurajima, Konohana-ku, Osaka 554-0031, Japan",
+        "verification": "Official USJ address; coordinate reference cross-checked with published location data.",
+        "mapsQuery": "https://www.google.com/maps/search/?api=1&query=34.6655,135.4323"
+      }
+    },
+    {
+      "id": "hozenji",
+      "name": "Hozen-ji",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-09"
+      ]
+    },
+    {
+      "id": "okonomiyaki-houzenji-sanpei",
+      "name": "Okonomiyaki Houzenji Sanpei",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 2000,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-09"
+      ]
+    },
+    {
+      "id": "mugen-ramen",
+      "name": "Mugen Ramen",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 2680,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-09"
+      ]
+    },
+    {
+      "id": "kuromon-market",
+      "name": "Kuromon Market",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 3,
+      "itineraryDates": [
+        "2026-12-10",
+        "2026-12-11",
+        "2026-12-12"
+      ]
+    },
+    {
+      "id": "ourlog-coffee-honmachi",
+      "name": "Ourlog Coffee Honmachi",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "nipponbashi-denden-town",
+      "name": "Nipponbashi Denden Town",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "super-potato-ota-road",
+      "name": "Super Potato Retrokan Ota Road Branch",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "surugaya-ota-road",
+      "name": "SURUGA-YA Ota-Road Anime and Hobby Store",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "k-books-namba-ichibankan",
+      "name": "K-books Namba-ichibankan",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "sakimoto-bakery",
+      "name": "SAKImoto bakery",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "shinsekai",
+      "name": "Shinsekai",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "tsutenkaku",
+      "name": "Tsutenkaku",
+      "category": "attraction",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 1200,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "kushiyakiyatai",
+      "name": "Kushiyakiyatai Tsuruhashiotokogushi",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 3000,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "round1-sennichimae",
+      "name": "Round1 Stadium Sennichimae",
+      "category": "entertainment",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "gee-store-osaka",
+      "name": "Gee Store Osaka",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "marmot-village",
+      "name": "Marmot Village",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "u-arts",
+      "name": "U-ARTS",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "tsukitoh",
+      "name": "月盗",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "marmot-cafe",
+      "name": "マーモットカフェ マーモット村大阪",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "dogyan",
+      "name": "Dogyan",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 1000,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "kuromonmaru",
+      "name": "#kuromonmaru",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-12"
+      ]
+    },
+    {
+      "id": "capcomix-abeno-hoop",
+      "name": "CAPCOMIX Abeno Hoop",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-12"
+      ]
+    },
+    {
+      "id": "sur-pla-dotonbori",
+      "name": "サープラ大阪道頓堀あそびタウン",
+      "category": "entertainment",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-12"
+      ]
+    },
+    {
+      "id": "sekai-no-yamachan",
+      "name": "Sekai no Yamachan Sennichimae",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-12"
+      ]
+    },
+    {
+      "id": "tempura-makino-namba",
+      "name": "Tempura Makino Namba",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 1350,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-12"
+      ]
+    },
+    {
+      "id": "tonkatsu-new-babe",
+      "name": "Tonkatsu New Babe Namba",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 3500,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "nerd-room",
+      "name": "NERD ROOM",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "tokito",
+      "name": "と木と (tokito)",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 1800,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "sumiyaki-unafuji-umeda",
+      "name": "Sumiyaki Unafuji Osaka Umeda Store",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "kiddy-land-umeda",
+      "name": "Kiddy Land Osaka Umeda",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "hep-five",
+      "name": "HEP FIVE",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "honeys-namba-walk",
+      "name": "HONEYS Namba Walk Store",
+      "category": "shopping",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "nikusakana-umeda",
+      "name": "Yakiniku and seafood Nikusakana Umeda Higashidori",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-13"
+      ]
+    },
+    {
+      "id": "shinsaibashi-maruhana",
+      "name": "Japanese Buffet Dining Shinsaibashi Maruhana",
+      "category": "food",
+      "city": "Osaka",
+      "part": "part2",
+      "links": {},
+      "priceJPY": 7500,
+      "usageCount": 1,
+      "itineraryDates": [
+        "2026-12-14"
+      ]
+    }
+  ],
+  "transit": {
+    "notes": [
+      "Pass 2 adds structured reference sequences to saved routes.",
+      "These are educational/reference directions, not live navigation or guaranteed platform assignments.",
+      "Check current operator timetables, service status, platform and station signage on the day of travel."
+    ],
+    "referenceRoutes": [
+      {
+        "id": "haruka-kix-kyoto",
+        "from": "Kansai International Airport",
+        "to": "Kyoto Station",
+        "mode": [
+          "JR"
+        ],
+        "duration": "~1h20–1h30",
+        "fareJPY": 2200,
+        "farePHP": 872,
+        "label": "JR HARUKA",
+        "steps": [
+          {
+            "type": "walk",
+            "title": "Arrive at Kansai International Airport",
+            "detail": "Follow signs to the JR station at Kansai Airport Terminal 1."
+          },
+          {
+            "type": "board",
+            "title": "Take the JR HARUKA",
+            "detail": "Board the limited express HARUKA toward Kyoto. Use the current platform and service shown by JR on the day."
+          },
+          {
+            "type": "arrive",
+            "title": "Arrive at Kyoto Station",
+            "detail": "Follow station signs for your onward connection or exit."
+          }
+        ],
+        "lastVerified": "2026-10-06",
+        "verification": "Reference sequence; check live operator information on travel day.",
+        "walkingNote": "Walking segments are directional only; use current station signage for exact exits."
+      },
+      {
+        "id": "keihan-gion-hirakata",
+        "from": "Gion-Shijo",
+        "to": "Hirakata-koen",
+        "mode": [
+          "Keihan"
+        ],
+        "duration": "~30–40 min",
+        "fareJPY": "~370–450",
+        "farePHP": "~147–178",
+        "label": "KEIHAN",
+        "steps": [
+          {
+            "type": "walk",
+            "title": "Walk to Gion-Shijo Station",
+            "detail": "Use the Keihan Gion-Shijo station entrance."
+          },
+          {
+            "type": "board",
+            "title": "Take the Keihan line",
+            "detail": "Board a train toward Hirakata / Osaka-side destinations; confirm the service and stopping pattern on the day."
+          },
+          {
+            "type": "arrive",
+            "title": "Arrive at Hirakata-koen Station",
+            "detail": "Exit toward Hirakata Park and follow the park signs."
+          }
+        ],
+        "lastVerified": "2026-10-06",
+        "verification": "Reference sequence; check live operator information on travel day.",
+        "walkingNote": "Walking segments are directional only; use current station signage for exact exits."
+      },
+      {
+        "id": "kyoto-nippombashi",
+        "from": "Kyoto Station",
+        "to": "Nippombashi",
+        "mode": [
+          "JR",
+          "Osaka Metro"
+        ],
+        "duration": "~46 min",
+        "fareJPY": "~850–1,130",
+        "farePHP": "~337–447",
+        "label": "JR + METRO",
+        "steps": [
+          {
+            "type": "board",
+            "title": "Depart Kyoto Station by JR",
+            "detail": "Take the appropriate JR service toward Osaka. Confirm the current service and platform at Kyoto Station."
+          },
+          {
+            "type": "transfer",
+            "title": "Transfer in Osaka",
+            "detail": "Follow signs for the Osaka Metro connection toward Nippombashi."
+          },
+          {
+            "type": "board",
+            "title": "Take Osaka Metro to Nippombashi",
+            "detail": "Use the current platform/service shown by Osaka Metro."
+          },
+          {
+            "type": "arrive",
+            "title": "Arrive at Nippombashi",
+            "detail": "Follow exit signs for your destination."
+          }
+        ],
+        "lastVerified": "2026-10-06",
+        "verification": "Reference sequence; check live operator information on travel day.",
+        "walkingNote": "Walking segments are directional only; use current station signage for exact exits."
+      },
+      {
+        "id": "nippombashi-usj",
+        "from": "Nippombashi",
+        "to": "Universal City",
+        "mode": [
+          "Hanshin",
+          "JR"
+        ],
+        "duration": "~35 min",
+        "fareJPY": "~275–385",
+        "farePHP": "~109–153",
+        "label": "HANSHIN + JR",
+        "steps": [
+          {
+            "type": "board",
+            "title": "Depart Nippombashi",
+            "detail": "Use the Hanshin connection toward Osaka / Nishikujo."
+          },
+          {
+            "type": "transfer",
+            "title": "Transfer toward Universal City",
+            "detail": "At the appropriate connection, follow signs for JR Yumesaki Line / Universal City services."
+          },
+          {
+            "type": "board",
+            "title": "Take the JR service to Universal City",
+            "detail": "Confirm the current service and platform before boarding."
+          },
+          {
+            "type": "arrive",
+            "title": "Arrive at Universal City Station",
+            "detail": "Follow signs toward Universal Studios Japan."
+          }
+        ],
+        "lastVerified": "2026-10-06",
+        "verification": "Reference sequence; check live operator information on travel day.",
+        "walkingNote": "Walking segments are directional only; use current station signage for exact exits."
+      }
+    ],
+    "fareReferences": [
+      {
+        "name": "Kyoto Subway single ride",
+        "fareJPY": "¥220–360"
+      },
+      {
+        "name": "Kyoto Subway 1-day pass",
+        "fareJPY": "¥800"
+      },
+      {
+        "name": "Kyoto Subway + Bus 1-day pass",
+        "fareJPY": "¥1,100"
+      },
+      {
+        "name": "Osaka Metro single ride",
+        "fareJPY": "¥190–390"
+      },
+      {
+        "name": "Osaka Metro weekend 1-day pass",
+        "fareJPY": "¥620"
+      },
+      {
+        "name": "Osaka Metro weekday 1-day pass",
+        "fareJPY": "¥820"
+      }
+    ]
+  },
+  "excludedFeatures": [
+    "Group meetup system",
+    "Group mode / group coordination",
+    "Travel journal",
+    "Spring-in-Japan guide",
+    "Pixel-art collectibles"
+  ],
+  "plannedFeatures": [
+    "Today's Adventure",
+    "Complete itinerary",
+    "Attraction encyclopedia",
+    "Wikipedia and official web links",
+    "Point-to-point travel instructions",
+    "Interactive Osaka/Kyoto map",
+    "Food guide",
+    "Trip budget with JPY/PHP",
+    "Packing/preparation tools",
+    "Japan transit guide",
+    "Global search",
+    "Dark/light mode",
+    "Offline-first PWA"
+  ]
+};

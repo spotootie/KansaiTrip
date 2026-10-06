@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2b2140">
+  <meta name="description" content="Kansai Adventure — Kyoto × Osaka 16-bit autumn travel companion.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <title>Kansai Adventure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="back-button" id="backButton" aria-label="Go back" title="Go back">← <span>BACK</span></button>
+        <button class="brand" data-view="today" aria-label="Go to Today's Adventure">
+        <span class="brand-mark">🍁</span>
+        <span>
+          <strong>KANSAI</strong>
+          <small>ADVENTURE</small>
+        </span>
+        </button>
+      </div>
+      <div class="topbar-search"><input id="globalSearch" type="search" placeholder="Search the trip…" aria-label="Search the trip"></div>
+      <div class="topbar-actions">
+        <button class="icon-button" id="themeToggle" aria-label="Toggle dark mode">◐</button>
+        <button class="icon-button" id="menuToggle" aria-label="Open navigation">☰</button>
+      </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+      <nav>
+        <button class="nav-item active" data-view="today">🏠 <span>Today's Adventure</span></button>
+        <button class="nav-item" data-view="itinerary">🗓 <span>Itinerary</span></button>
+        <button class="nav-item" data-view="places">🏯 <span>Places</span></button>
+        <button class="nav-item" data-view="transit">🚆 <span>Transit</span></button>
+        <button class="nav-item" data-view="map">🗺 <span>Map</span></button>
+        <button class="nav-item" data-view="dayroute">🧭 <span>Day Route</span></button>
+        <button class="nav-item" data-view="food">🍜 <span>Food</span></button>
+        <button class="nav-item" data-view="budget">¥ <span>Budget</span></button>
+        <button class="nav-item" data-view="tools">🎒 <span>Trip Tools</span></button>
+      </nav>
+      <div class="sidebar-footer">
+        <span>R2 • PASS 11</span>
+        <span>16-BIT KANSAI</span>
+        <span class="offline-badge">OFFLINE-READY</span>
+        <small>App created by Isay Navarro, MD.<br>Latest version October 2026.</small>
+      </div>
+    </aside>
+
+    <main id="main" class="main-content" tabindex="-1"></main>
+
+    <nav class="mobile-nav" aria-label="Primary navigation">
+      <button data-view="today" class="active">🏠<small>Today</small></button>
+      <button data-view="itinerary">🗓<small>Plan</small></button>
+      <button data-view="places">🏯<small>Places</small></button>
+      <button data-view="transit">🚆<small>Transit</small></button>
+      <button data-view="dayroute">🧭<small>Route</small></button>
+      <button data-view="budget">¥<small>Budget</small></button>
+    </nav>
+  </div>
+  <script type="module" src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js", { scope: "./" })
+          .then(reg => {
+            reg.update();
+            navigator.serviceWorker.addEventListener("message", event => {
+              if (event.data?.type === "KansaiAdventureOfflineReady") {
+                document.documentElement.dataset.offlineReady = "true";
+              }
+            });
+          })
+          .catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

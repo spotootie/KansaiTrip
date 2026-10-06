@@ -1,0 +1,21 @@
+export const budgetIndex = {
+  currency: 'JPY',
+  secondaryCurrency: 'PHP',
+  fx: { jpyToPhp: 0.396542, capturedAt: '2026-10-06T12:29:00Z', label: 'Live reference captured 2026-10-06' },
+  entries: [
+    {id:'nintendo-museum',name:'Nintendo Museum',date:'2026-12-06',category:'attraction',amountJPY:3300,status:'reference',note:'Stored in itinerary place data.'},
+    {id:'kyoto-aquarium',name:'Kyoto Aquarium',date:'2026-12-08',category:'attraction',amountJPY:2600,status:'reference'},
+    {id:'yakiniku-hanamichi',name:'Yakiniku Hanamichi',date:'2026-12-08',category:'food',amountJPY:7260,status:'reference'},
+    {id:'universal-studios-japan',name:'Universal Studios Japan',date:'2026-12-09',category:'attraction',amountJPY:8400,status:'starting reference',note:'Date-dependent; verify current ticket price.'},
+    {id:'okonomiyaki-houzenji-sanpei',name:'Okonomiyaki Houzenji Sanpei',date:'2026-12-09',category:'food',amountJPY:2000,status:'reference'},
+    {id:'mugen-ramen',name:'Mugen Ramen',date:'2026-12-09',category:'food',amountJPY:2680,status:'reference'},
+    {id:'tsutenkaku',name:'Tsutenkaku',date:'2026-12-10',category:'attraction',amountJPY:1200,status:'reference'},
+    {id:'kushiyakiyatai',name:'Kushiyakiyatai Tsuruhashiotokogushi',date:'2026-12-10',category:'food',amountJPY:3000,status:'reference'},
+    {id:'dogyan',name:'Dogyan',date:'2026-12-11',category:'food',amountJPY:1000,status:'reference'},
+    {id:'tempura-makino-namba',name:'Tempura Makino Namba',date:'2026-12-12',category:'food',amountJPY:1350,status:'reference'},
+    {id:'tonkatsu-new-babe',name:'Tonkatsu New Babe Namba',date:'2026-12-13',category:'food',amountJPY:3500,status:'reference'},
+    {id:'tokito',name:'と木と (tokito)',date:'2026-12-13',category:'food',amountJPY:1800,status:'reference'},
+    {id:'shinsaibashi-maruhana',name:'Japanese Buffet Dining Shinsaibashi Maruhana',date:'2026-12-14',category:'food',amountJPY:7500,status:'reference',note:'Lunch reference; itinerary says consider booking ahead.'},
+    {id:'haruka-kix-kyoto',name:'JR HARUKA: Kansai Airport → Kyoto Station',date:'2026-12-05',category:'transit',amountJPY:2200,status:'reference',note:'Saved transit reference; check current fare.'}
+  ]
+};

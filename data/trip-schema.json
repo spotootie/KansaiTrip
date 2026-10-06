@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "requiredTopLevel": [
+    "version",
+    "trip",
+    "parts",
+    "places",
+    "transit"
+  ],
+  "tripRequired": [
+    "id",
+    "title",
+    "year",
+    "startDate",
+    "endDate",
+    "timezone",
+    "currency",
+    "secondaryCurrency"
+  ],
+  "partRequired": [
+    "id",
+    "title",
+    "startDate",
+    "endDate",
+    "days"
+  ],
+  "dayRequired": [
+    "date",
+    "city",
+    "title",
+    "subtitle",
+    "stops"
+  ],
+  "stopRequired": [
+    "placeId",
+    "type",
+    "title"
+  ],
+  "placeRequired": [
+    "id",
+    "name",
+    "city",
+    "category"
+  ],
+  "rules": [
+    "dates must be ISO YYYY-MM-DD",
+    "place IDs must be unique",
+    "day dates must be unique across parts",
+    "stop.placeId should resolve to a place, except known operational pseudo-stops such as kix/part1-end/park-option"
+  ]
+}

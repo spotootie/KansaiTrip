@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "tripId": "kansai-adventure-2026",
+  "entries": [
+    {
+      "id": "2026-10-06-r1-p4",
+      "date": "2026-10-06",
+      "appVersion": "r1-p4",
+      "summary": "Established the versioned itinerary data/update pipeline.",
+      "changes": [
+        "Added trip metadata and source/update policy",
+        "Added machine-checkable itinerary validation",
+        "Documented the recurring Wanderlog update workflow"
+      ],
+      "source": "Supplied itinerary data already incorporated into the app"
+    },
+    {
+      "id": "2026-10-06-r2-p8",
+      "date": "2026-10-06",
+      "appVersion": "r2-p8",
+      "summary": "Added practical trip preparation tools and locally saved checklists.",
+      "changes": [
+        "Added packing checklist with localStorage progress",
+        "Added pre-trip preparation checklist with localStorage progress",
+        "Added three-stage lodging overview from canonical itinerary",
+        "Added reservation and ticket confirmation reminders without inventing booking details",
+        "Preserved Dec 15–19 as explicitly open/unplanned"
+      ],
+      "source": "Canonical supplied itinerary data"
+    },
+    {
+      "id": "2026-10-06-r2-p9",
+      "date": "2026-10-06",
+      "appVersion": "r2-p9",
+      "summary": "Incorporated confirmed Philippine Airlines arrival and departure flights for The Navis.",
+      "changes": [
+        "Updated Nov 30 arrival from ETA-only to confirmed PR 412 flight details.",
+        "Added Dec 12 confirmed PR 407 departure from KIX to MNL.",
+        "Preserved all existing Dec 12 itinerary activities and flagged the departure-time conflict for review."
+      ],
+      "source": "User-supplied flight confirmation image"
+    },
+    {
+      "id": "2026-10-06-r2-p10",
+      "date": "2026-10-06",
+      "appVersion": "r2-p10",
+      "summary": "Clarified traveler split after The Navis departure.",
+      "changes": [
+        "Marked Carlos and Isay as The Navis and Georgia, Raph, and Arth as the remaining group from Dec 12 onward.",
+        "Marked Dec 12 as a transition day: The Navis depart KIX while the remaining group continues the Osaka itinerary.",
+        "Removed the false Dec 12 conflict warning because the listed activities belong to the remaining group, not the departing travelers.",
+        "Added traveler metadata to dated itinerary days for reusable display and future filtering."
+      ],
+      "source": "User clarification"
+    },
+    {
+      "id": "2026-10-06-r2-p12",
+      "date": "2026-10-06",
+      "appVersion": "r2-p12",
+      "summary": "Completed the offline-first PWA foundation for GitHub Pages.",
+      "changes": [
+        "Replaced the placeholder service worker with a versioned app-shell cache.",
+        "Cached canonical itinerary, place, location, food and budget data for offline use.",
+        "Added automatic service-worker registration and offline-ready messaging.",
+        "Added install metadata and an offline-capable app icon.",
+        "Preserved external links as online-only resources while keeping core trip data local."
+      ],
+      "source": "Kansai Adventure app implementation"
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-10-06",
+      "release": "R2-P11",
+      "type": "feature",
+      "summary": "Added traveler-aware itinerary lens for The Navis (Carlos + Isay) and the remaining group (Georgia + Raph + Arth), including shared-day filtering and Dec 12 departure split."
+    },
+    {
+      "date": "2026-10-06",
+      "release": "R2-P12",
+      "type": "feature",
+      "summary": "Completed the offline-first PWA foundation with versioned caching, install metadata and local trip-data caching."
+    }
+  ]
+}

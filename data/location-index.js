@@ -1,0 +1,23 @@
+export const locationIndex = {
+  "nintendo-museum": {
+    "lat": 34.89278,
+    "lng": 135.78417,
+    "address": "56 Kaguraden, Ogura-cho, Uji-shi, Kyoto 611-0042, Japan",
+    "verification": "Official Nintendo Museum access page; coordinate reference from Wikimedia Commons map data.",
+    "mapsQuery": "https://www.google.com/maps/search/?api=1&query=34.89278,135.78417"
+  },
+  "osaka-castle": {
+    "lat": 34.6873153,
+    "lng": 135.5262013,
+    "address": "1-1 Osakajo, Chuo-ku, Osaka 540-0002, Japan",
+    "verification": "Official Osaka Castle address; coordinate reference cross-checked with published location data.",
+    "mapsQuery": "https://www.google.com/maps/search/?api=1&query=34.6873153,135.5262013"
+  },
+  "universal-studios-japan": {
+    "lat": 34.6655,
+    "lng": 135.4323,
+    "address": "2-1-33 Sakurajima, Konohana-ku, Osaka 554-0031, Japan",
+    "verification": "Official USJ address; coordinate reference cross-checked with published location data.",
+    "mapsQuery": "https://www.google.com/maps/search/?api=1&query=34.6655,135.4323"
+  }
+};

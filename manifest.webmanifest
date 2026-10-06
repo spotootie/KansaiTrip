@@ -1,0 +1,19 @@
+{
+  "name": "Kansai Adventure",
+  "short_name": "Kansai",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff7e9",
+  "theme_color": "#40355f",
+  "description": "Kyoto × Osaka 16-bit autumn travel companion",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
