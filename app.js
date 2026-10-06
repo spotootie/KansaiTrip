@@ -98,30 +98,54 @@ function formatDate(date) {
   }).format(new Date(`${date}T12:00:00`));
 }
 
-function setView(view, {push=true, date=null, place=null} = {}) {
-  if (!view) return;
-  const params = new URLSearchParams(location.search);
-  const currentView = params.get("view") || state.view || "today";
-  const currentDate = params.get("date") || state.selectedDate || null;
-  const currentPlace = params.get("place") || null;
-  const nextDate = date || null;
-  const nextPlace = place || null;
-  const changed = view !== currentView || nextDate !== currentDate || nextPlace !== currentPlace;
+function routeFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    view: params.get("view") || "today",
+    date: params.get("date") || null,
+    place: params.get("place") || null,
+    q: params.get("q") || ""
+  };
+}
 
-  if (push && state.routeInitialized && changed) {
-    state.history.push({view: currentView, date: currentDate, place: currentPlace});
-    const next = new URLSearchParams();
-    next.set("view", view);
-    if (nextDate) next.set("date", nextDate);
-    if (nextPlace) next.set("place", nextPlace);
-    history.pushState({view, date: nextDate, place: nextPlace}, "", `?${next.toString()}`);
-  }
+function routeUrl(route) {
+  const params = new URLSearchParams();
+  params.set("view", route.view || "today");
+  if (route.date) params.set("date", route.date);
+  if (route.place) params.set("place", route.place);
+  if (route.q) params.set("q", route.q);
+  const query = params.toString();
+  return `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+}
 
-  state.view = view;
-  state.selectedDate = nextDate;
+function applyRoute(route, {focus=true} = {}) {
+  state.view = route.view || "today";
+  state.selectedDate = route.date || null;
+  state.selectedPlace = route.place || null;
   render();
-  main.focus({preventScroll:true});
+  if (focus) main.focus({preventScroll:true});
   sidebar.classList.remove("open");
+}
+
+function navigate(view, options = {}) {
+  if (!view) return;
+  const route = {
+    view,
+    date: options.date || null,
+    place: options.place || null,
+    q: options.q || ""
+  };
+  const current = routeFromUrl();
+  const same = current.view === route.view && current.date === route.date && current.place === route.place && current.q === route.q;
+  if (!same && options.push !== false) {
+    window.history.pushState(route, "", routeUrl(route));
+  }
+  applyRoute(route);
+}
+
+// Back is browser history, not a second application-level navigation system.
+function goBack() {
+  if (window.history.length > 1) window.history.back();
 }
 
 function stopMarkup(stop) {
@@ -459,6 +483,94 @@ function renderPlaceDetail(id) {
     </div>`;
 }
 
+function renderTransit() {
+  const places = [...tripData.places].sort((a,b) => a.name.localeCompare(b.name));
+  const from = state.transitFrom || "";
+  const to = state.transitTo || "";
+  const fromName = state.transitFromName || places.find(p => p.id === from)?.name || "";
+  const toName = state.transitToName || places.find(p => p.id === to)?.name || "";
+  const saved = tripData.transit.referenceRoutes.find(r =>
+    (r.from.toLowerCase() === fromName.toLowerCase() && r.to.toLowerCase() === toName.toLowerCase()) ||
+    (r.from.toLowerCase() === toName.toLowerCase() && r.to.toLowerCase() === fromName.toLowerCase())
+  );
+  const routeStatus = from && to && from !== to ? (saved ? "reference" : "unavailable") : "empty";
+  return `
+    <section class="hero">
+      <div class="kicker">POINT-TO-POINT TRAVEL</div>
+      <div class="hero-title-row"><div><h1>How do I get there?</h1></div><div class="hero-emblem" aria-hidden="true">🚆</div></div><div class="pixel-divider"></div>
+      <p class="muted">Choose two places from the trip to compare against the app's verified route references. Live navigation is not assumed.</p>
+    </section>
+    <section class="card route-planner">
+      <div class="section-head"><div><div class="kicker">ROUTE PLANNER</div><h2>From → To</h2></div><span class="tag">OFFLINE-SAFE</span></div>
+      <div class="route-fields">
+        <label><span>FROM</span><select id="transitFrom"><option value="">Choose a place…</option>${places.map(p=>`<option value="${p.id}" ${p.id===from?"selected":""}>${escapeHtml(p.name)} — ${escapeHtml(p.city)}</option>`).join("")}</select></label>
+        <div class="route-arrow" aria-hidden="true">→</div>
+        <label><span>TO</span><select id="transitTo"><option value="">Choose a place…</option>${places.map(p=>`<option value="${p.id}" ${p.id===to?"selected":""}>${escapeHtml(p.name)} — ${escapeHtml(p.city)}</option>`).join("")}</select></label>
+      </div>
+      ${routeStatus === "reference" ? `<div class="route-result"><span class="tag">${saved.label}</span><h3>${escapeHtml(saved.from)} → ${escapeHtml(saved.to)}</h3><p><strong>${escapeHtml(saved.duration)}</strong> · ${typeof saved.fareJPY === "number" ? "¥"+saved.fareJPY.toLocaleString() : escapeHtml(saved.fareJPY)}</p><p class="muted">Modes: ${saved.mode.join(" + ")}</p><div class="route-steps">${(saved.steps || []).map((step,i)=>`<div class="route-step"><span class="route-step-number">${i+1}</span><div><strong>${escapeHtml(step.title)}</strong><p>${escapeHtml(step.detail)}</p></div></div>`).join("")}</div><div class="notice">${escapeHtml(saved.verification || "Stored reference sequence, not live navigation.")} Check the operator's current timetable, platform and service status on the day.</div></div>`
+      : routeStatus === "unavailable" ? `<div class="notice">No saved route reference matches this pair yet. The app will not invent a transfer sequence. A later transit-data pass can add a verified route here.</div>`
+      : `<div class="notice">Select an origin and destination to check the stored route references.</div>`}
+    </section>
+
+    <section class="section-head"><div><div class="kicker">SAVED ROUTES</div><h2>Core trip transfers</h2></div></section>
+    <div class="grid grid-2">
+      ${tripData.transit.referenceRoutes.map(r => `<button class="card card-button transit-reference" data-transit-from-name="${escapeHtml(r.from)}" data-transit-to-name="${escapeHtml(r.to)}"><span class="tag">${r.label}</span><h3>${escapeHtml(r.from)} → ${escapeHtml(r.to)}</h3><p>${escapeHtml(r.duration)} · ${typeof r.fareJPY === "number" ? "¥"+r.fareJPY.toLocaleString() : escapeHtml(r.fareJPY)}</p><small class="muted">${r.mode.join(" + ")}</small></button>`).join("")}
+    </div>
+    <div class="section-head"><div><div class="kicker">FARE REFERENCE</div><h2>Reference values</h2></div></div>
+    <div class="grid grid-3">
+      ${tripData.transit.fareReferences.map(f => `<div class="card"><h3>${escapeHtml(f.name)}</h3><p>${escapeHtml(f.fareJPY)}</p></div>`).join("")}
+    </div>`;
+}
+
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>'"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));
+}
+
+
+function globalSearchItems() {
+  const items = [];
+  allDays().forEach(day => {
+    (day.stops || []).forEach(stop => items.push({
+      kind:"itinerary", icon:icons[stop.type] || "📍", title:stop.title,
+      meta:`${formatDate(day.date)} · ${day.city}`, search:[stop.title, stop.note, stop.alternative, day.title, day.city].filter(Boolean).join(" ").toLowerCase(),
+      action:`data-view="itinerary" data-date="${day.date}"`
+    }));
+  });
+  tripData.places.forEach(p => items.push({
+    kind:"place", icon:icons[p.category] || "📍", title:p.name,
+    meta:`${p.city} · ${p.category}`, search:[p.name,p.city,p.category,p.id, ...(p.category === "food" ? ["food","restaurant","cafe","dining"] : [])].join(" ").toLowerCase(),
+    action:`data-view="places" data-place="${p.id}"`
+  }));
+  tripData.parts.forEach(part => items.push({
+    kind:"day", icon:"🗓", title:part.title, meta:`${part.startDate} → ${part.endDate}`,
+    search:[part.title,part.description].join(" ").toLowerCase(), action:`data-view="itinerary" data-date="${part.startDate}"`
+  }));
+  return items;
+}
+
+
+function renderSearch(query="") {
+  const q = query.trim().toLowerCase();
+  const all = globalSearchItems();
+  const results = q ? all.filter(x => x.search.includes(q)).slice(0, 40) : [];
+  return `
+    <section class="hero search-hero">
+      <div class="kicker">TRIP-WIDE SEARCH</div>
+      <div class="hero-title-row"><div><h1>Search the trip</h1></div><div class="hero-emblem" aria-hidden="true">🔎</div></div>
+      <div class="pixel-divider"></div>
+      <p class="muted">Search itinerary stops, places, food, cities, categories, notes, and trip parts.</p>
+      <input class="search-box search-page-input" id="searchPageInput" value="${escapeHtml(query)}" placeholder="Try “Nintendo”, “Kyoto”, “ramen”, or “Dec 10”" aria-label="Search the trip">
+    </section>
+    ${q ? `<div class="section-head"><div><div class="kicker">RESULTS</div><h2>${results.length} match${results.length===1?"":"es"}</h2></div></div>
+      ${results.length ? `<div class="search-results">${results.map(r=>`<button class="card search-result" ${r.action}><span class="search-result-icon">${r.icon}</span><span><strong>${escapeHtml(r.title)}</strong><small>${escapeHtml(r.meta)}</small></span><span>→</span></button>`).join("")}</div>` : `<div class="notice">No matches yet. Try a place name, city, food category, or itinerary stop.</div>`}` : `<div class="card"><h3>Search across the whole trip</h3><p class="muted">The same reusable place records and itinerary data power these results, so future Wanderlog updates will automatically be searchable.</p></div>`}`;
+}
+
+function mapSearchUrl(name) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + " Japan")}`;
+}
+
+
 function renderMap() {
   const cities = [
     {name:"Kyoto", id:"kyoto", note:"Kyoto base + eastern/southern Kyoto days", color:"#6f5b75"},
@@ -635,7 +747,7 @@ function renderSimple(view) {
 }
 
 function render() {
-  const canGoBack = state.history.length > 0;
+  const canGoBack = window.history.length > 1;
   backButton.classList.toggle("visible", canGoBack);
   backButton.setAttribute("aria-hidden", String(!canGoBack));
   document.querySelectorAll(".sidebar .nav-item, .mobile-nav [data-view]").forEach(el => el.classList.toggle("active", el.dataset.view === state.view));
@@ -652,11 +764,8 @@ function render() {
     state.view === "search" ? renderSearch(new URLSearchParams(location.search).get("q") || "") :
     renderSimple(state.view);
 
-  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {
-    date: btn.dataset.date || null,
-    place: btn.dataset.place || null
-  })));
-  main.querySelectorAll("[data-part]").forEach(btn => btn.addEventListener("click", () => setView("itinerary")));
+  // Main-area navigation is handled once by the delegated listener below.
+  main.querySelectorAll("[data-part]").forEach(btn => btn.addEventListener("click", () => navigate("itinerary")));
   main.querySelectorAll("[data-traveler-filter]").forEach(btn => btn.addEventListener("click", () => { state.travelerFilter = btn.dataset.travelerFilter; localStorage.setItem("kansai-traveler-filter", state.travelerFilter); render(); }));
   if (state.view === "food") bindFoodFilters();
   if (state.view === "budget") {
@@ -684,7 +793,7 @@ function render() {
   }));
   main.querySelectorAll("[data-place]").forEach(btn => {
     if (btn.dataset.view) return;
-    const open = () => setView("places", {place: btn.dataset.place});
+    const open = () => navigate("places", {place: btn.dataset.place});
     btn.addEventListener("click", open);
     btn.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
   });
@@ -714,19 +823,18 @@ function render() {
   });
 }
 
+
 function bindRenderedSearch() {
-  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {date: btn.dataset.date || null, place: btn.dataset.place || null})));
   main.querySelectorAll("[data-map-city]").forEach(btn => btn.addEventListener("click", () => {
     const city = btn.dataset.mapCity;
     const matches = tripData.places.filter(p => p.city.toLowerCase().includes(city.toLowerCase() === "osaka bay" ? "osaka" : city.toLowerCase()));
-    if (matches[0]) setView("places", {place: matches[0].id});
+    if (matches[0]) navigate("places", {place: matches[0].id});
   }));
 
   const input = document.querySelector("#searchPageInput");
   if (input) { input.focus({preventScroll:true}); input.setSelectionRange(input.value.length,input.value.length); input.addEventListener("input", () => { const q=input.value; const params=new URLSearchParams(location.search); params.set("view","search"); if(q) params.set("q",q); else params.delete("q"); history.replaceState({view:"search",q},"",`?${params.toString()}`); main.innerHTML=renderSearch(q); bindRenderedSearch(); }); }
 }
 
-document.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view)));
 uiModeToggle?.addEventListener("click", () => {
   const next = document.documentElement.dataset.uiMode === "modern" ? "pixel" : "modern";
   document.documentElement.dataset.uiMode = next;
@@ -743,20 +851,26 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("kansai-theme", next);
 });
 menuToggle.addEventListener("click", () => sidebar.classList.toggle("open"));
-backButton.addEventListener("click", () => {
-  if (state.history.length) {
-    history.back();
-  }
-});
+backButton.addEventListener("click", goBack);
+
 window.addEventListener("popstate", event => {
-  const previous = state.history.pop();
-  if (previous) {
-    setView(previous.view, {push:false, date: previous.date, place: previous.place});
-    return;
-  }
-  const params = new URLSearchParams(location.search);
-  const view = params.get("view") || "today";
-  setView(view, {push:false, date: params.get("date") || null, place: params.get("place") || null});
+  const route = { ...routeFromUrl(), ...(event.state || {}) };
+  applyRoute(route);
+});
+
+// Single navigation listener for every current and future [data-view] element.
+document.addEventListener("click", event => {
+  const target = event.target instanceof Element ? event.target : null;
+  const link = target?.closest("[data-view]");
+  if (!link) return;
+  if (link.matches("a") && link.getAttribute("target") === "_blank") return;
+  if (link.disabled || link.getAttribute("aria-disabled") === "true") return;
+  event.preventDefault();
+  const view = link.dataset.view;
+  const date = link.dataset.date || null;
+  const place = link.dataset.place || null;
+  const q = link.dataset.query || null;
+  navigate(view, {date, place, q});
 });
 
 
@@ -770,7 +884,6 @@ function bindFoodFilters() {
     const c = city.value, m = meal.value;
     const filtered = foodIndex.entries.filter(f => (!c || f.city === c) && (!m || foodMealContext(f) === m));
     grid.innerHTML = filtered.length ? foodCards(filtered) : `<div class="notice">No food stops match these filters.</div>`;
-    grid.querySelectorAll('[data-view]').forEach(btn => btn.addEventListener('click', () => setView(btn.dataset.view, {place:btn.dataset.place})));
   };
   city.addEventListener('change', update); meal.addEventListener('change', update);
 }
@@ -792,7 +905,7 @@ const globalSearch = document.querySelector("#globalSearch");
 globalSearch?.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     const q = globalSearch.value.trim();
-    setView("search", {place:null});
+    navigate("search", {place:null});
     const params = new URLSearchParams(location.search); params.set("view","search"); if(q) params.set("q",q); else params.delete("q");
     history.replaceState({view:"search",q}, "", `?${params.toString()}`);
     render();
@@ -812,9 +925,7 @@ if (uiModeToggle) {
 
 
 
-const initialParams = new URLSearchParams(location.search);
-state.view = initialParams.get("view") || "today";
-state.selectedDate = initialParams.get("date") || null;
-history.replaceState({view: state.view, date: state.selectedDate}, "", location.href);
+const initialRoute = routeFromUrl();
+window.history.replaceState(initialRoute, "", routeUrl(initialRoute));
 state.routeInitialized = true;
-render();
+applyRoute(initialRoute, {focus:false});

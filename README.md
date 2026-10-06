@@ -84,3 +84,14 @@ Centralized navigation event handling and hardened URL/state synchronization aft
 
 ### R3-P5 — Practical Information Expansion
 Expanded source-backed practical details for additional itinerary destinations, with explicit verification status for date-specific hours/pricing.
+
+
+## R3 — Navigation Rebuild
+- Rebuilt application navigation around a single `navigate()` router.
+- Browser URL/history is the source of truth.
+- One global `[data-view]` click listener handles static and dynamically rendered navigation.
+- One `popstate` handler restores routes from the URL.
+- Removed competing per-view navigation handlers.
+- Restored shared rendering helpers required by the R2 navigation/runtime foundation.
+- Preserved the R3 Attraction Encyclopedia and practical-information data.
+- Service-worker cache version bumped for the navigation rebuild.

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kansai-adventure-r3-p3';
+const CACHE_NAME = 'kansai-adventure-r3-nav-rebuild';
 const APP_SHELL = [
   "./",
   "./index.html",
