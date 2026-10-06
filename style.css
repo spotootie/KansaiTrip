@@ -608,6 +608,16 @@ html[data-ui-mode="modern"] .day-picker,
 html[data-ui-mode="modern"] .day-route-chip,
 html[data-ui-mode="modern"] .food-card { overflow-wrap:anywhere; }
 
+
+/* Release 3 Pass 2 — stronger encyclopedia context navigation */
+.encyclopedia-mini-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:16px; }
+.encyclopedia-mini { min-width:0; padding:12px 14px; border:1px solid var(--line); border-radius:var(--radius,12px); background:var(--surface-2,rgba(127,127,127,.06)); }
+.encyclopedia-mini span { display:block; font-size:.7rem; font-weight:800; letter-spacing:.06em; opacity:.68; margin-bottom:5px; }
+.encyclopedia-mini strong { display:block; overflow-wrap:anywhere; line-height:1.4; }
+.encyclopedia-context-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+.encyclopedia-context-actions .btn { flex:1 1 190px; }
+@media (max-width:700px) { .encyclopedia-mini-grid { grid-template-columns:1fr; } }
+
 /* Release 3 — Attraction Encyclopedia */
 .place-encyclopedia { width:100%; min-width:0; }
 .encyclopedia-section { margin-top:16px; }
@@ -645,3 +655,5 @@ html[data-ui-mode="modern"] .food-card { overflow-wrap:anywhere; }
   .encyclopedia-facts,.resource-grid,.context-neighbors { grid-template-columns:1fr; }
   .context-occurrence-head { flex-direction:column; }
 }
+
+.encyclopedia-source-status{display:flex;align-items:center;gap:.55rem;margin-top:.65rem;flex-wrap:wrap}.encyclopedia-source-status small{opacity:.78}.source-link{margin-top:.65rem}.source-link a{font-weight:700}.encyclopedia-section .verified-chip{font-size:.72rem;letter-spacing:.04em}

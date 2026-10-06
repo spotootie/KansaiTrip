@@ -100,19 +100,25 @@ function formatDate(date) {
 
 function setView(view, {push=true, date=null, place=null} = {}) {
   if (!view) return;
-  const currentPlace = new URLSearchParams(location.search).get("place");
-  const changed = view !== state.view || (date && date !== state.selectedDate) || place !== currentPlace;
-  if (!changed) return;
-  if (push && state.routeInitialized) {
-    state.history.push({view: state.view, date: state.selectedDate, place: currentPlace});
-    const params = new URLSearchParams();
-    params.set("view", view);
-    if (date) params.set("date", date);
-    if (place) params.set("place", place);
-    history.pushState({view, date}, "", `?${params.toString()}`);
+  const params = new URLSearchParams(location.search);
+  const currentView = params.get("view") || state.view || "today";
+  const currentDate = params.get("date") || state.selectedDate || null;
+  const currentPlace = params.get("place") || null;
+  const nextDate = date || null;
+  const nextPlace = place || null;
+  const changed = view !== currentView || nextDate !== currentDate || nextPlace !== currentPlace;
+
+  if (push && state.routeInitialized && changed) {
+    state.history.push({view: currentView, date: currentDate, place: currentPlace});
+    const next = new URLSearchParams();
+    next.set("view", view);
+    if (nextDate) next.set("date", nextDate);
+    if (nextPlace) next.set("place", nextPlace);
+    history.pushState({view, date: nextDate, place: nextPlace}, "", `?${next.toString()}`);
   }
+
   state.view = view;
-  if (date) state.selectedDate = date;
+  state.selectedDate = nextDate;
   render();
   main.focus({preventScroll:true});
   sidebar.classList.remove("open");
@@ -394,6 +400,11 @@ function renderPlaceDetail(id) {
       <section class="card encyclopedia-section">
         <div class="section-head"><div><div class="kicker">OVERVIEW</div><h2>Why it's on your itinerary</h2></div></div>
         <p>${escapeHtml(e.overview || `A ${p.category} stop in ${p.city} included in your Kansai itinerary.`)}</p>
+        <div class="encyclopedia-mini-grid">
+          <div class="encyclopedia-mini"><span>TRIP ROLE</span><strong>${escapeHtml(p.category === 'hotel' ? 'Accommodation / base' : p.category === 'food' ? 'Food stop' : p.category === 'shopping' ? 'Shopping stop' : p.category === 'transport' || p.category === 'airport' || p.category === 'station' ? 'Travel connection' : 'Sightseeing / activity')}</strong></div>
+          <div class="encyclopedia-mini"><span>ITINERARY APPEARANCES</span><strong>${occurrences.length}</strong></div>
+          <div class="encyclopedia-mini"><span>CITY</span><strong>${escapeHtml(p.city)}</strong></div>
+        </div>
       </section>
 
       <section class="card encyclopedia-section">
@@ -404,6 +415,7 @@ function renderPlaceDetail(id) {
           <div class="encyclopedia-fact"><span>Recommended visit</span><strong>${escapeHtml(practical.duration || 'About 1–2 hours')}</strong></div>
           <div class="encyclopedia-fact"><span>Location</span><strong>${escapeHtml(location.label || `${p.city}, Japan`)}</strong>${location.verified ? '<small class="verified-chip">✓ location verified</small>' : '<small class="muted">Exact location not yet verified</small>'}</div>
           <div class="encyclopedia-fact"><span>Best time to visit</span><strong>${escapeHtml(practical.best || 'Follow the itinerary timing')}</strong></div>
+          <div class="encyclopedia-source-status"><span class="${e.verification?.status === 'source-backed' ? 'verified-chip' : 'muted'}">${e.verification?.status === 'source-backed' ? '✓ SOURCE-BACKED' : 'VERIFY BEFORE VISIT'}</span>${e.verification?.verifiedDate ? `<small>Verified ${escapeHtml(e.verification.verifiedDate)}</small>` : '<small>Practical details not yet deeply verified in this pass.</small>'}</div>
         </div>
         <div class="notice">${escapeHtml(e.sourceNote || 'Verify hours, admission and conditions before travel. The app does not invent missing facts.')}</div>
       </section>
@@ -432,7 +444,10 @@ function renderPlaceDetail(id) {
                 ${contextPlace('Previous stop', o.previous)}
                 ${contextPlace('Next stop', o.next)}
               </div>
-              <button class="btn secondary" data-date="${o.date}" data-view="itinerary">OPEN THIS DAY ↗</button>
+              <div class="encyclopedia-context-actions">
+                <button class="btn secondary" data-date="${o.date}" data-view="itinerary">OPEN THIS DAY ↗</button>
+                <button class="btn secondary" data-date="${o.date}" data-view="dayroute">OPEN DAY ROUTE ↗</button>
+              </div>
             </article>`).join('') : `<div class="notice">This place exists in the place database but is not currently linked to a dated itinerary stop.</div>`}
         </div>
       </section>
@@ -637,10 +652,7 @@ function render() {
     state.view === "search" ? renderSearch(new URLSearchParams(location.search).get("q") || "") :
     renderSimple(state.view);
 
-  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {
-    date: btn.dataset.date || null,
-    place: btn.dataset.place || null
-  })));
+  // Main-area navigation is handled once by the delegated listener below.
   main.querySelectorAll("[data-part]").forEach(btn => btn.addEventListener("click", () => setView("itinerary")));
   main.querySelectorAll("[data-traveler-filter]").forEach(btn => btn.addEventListener("click", () => { state.travelerFilter = btn.dataset.travelerFilter; localStorage.setItem("kansai-traveler-filter", state.travelerFilter); render(); }));
   if (state.view === "food") bindFoodFilters();
@@ -699,8 +711,14 @@ function render() {
   });
 }
 
+main.addEventListener("click", event => {
+  const btn = event.target.closest?.("[data-view]");
+  if (!btn) return;
+  event.preventDefault();
+  setView(btn.dataset.view, {date: btn.dataset.date || null, place: btn.dataset.place || null});
+});
+
 function bindRenderedSearch() {
-  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {date: btn.dataset.date || null, place: btn.dataset.place || null})));
   main.querySelectorAll("[data-map-city]").forEach(btn => btn.addEventListener("click", () => {
     const city = btn.dataset.mapCity;
     const matches = tripData.places.filter(p => p.city.toLowerCase().includes(city.toLowerCase() === "osaka bay" ? "osaka" : city.toLowerCase()));
@@ -711,7 +729,12 @@ function bindRenderedSearch() {
   if (input) { input.focus({preventScroll:true}); input.setSelectionRange(input.value.length,input.value.length); input.addEventListener("input", () => { const q=input.value; const params=new URLSearchParams(location.search); params.set("view","search"); if(q) params.set("q",q); else params.delete("q"); history.replaceState({view:"search",q},"",`?${params.toString()}`); main.innerHTML=renderSearch(q); bindRenderedSearch(); }); }
 }
 
-document.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view)));
+document.addEventListener("click", event => {
+  const btn = event.target.closest?.("[data-view]");
+  if (!btn || btn.closest("#main")) return;
+  event.preventDefault();
+  setView(btn.dataset.view, {date: btn.dataset.date || null, place: btn.dataset.place || null});
+});
 uiModeToggle?.addEventListener("click", () => {
   const next = document.documentElement.dataset.uiMode === "modern" ? "pixel" : "modern";
   document.documentElement.dataset.uiMode = next;

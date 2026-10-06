@@ -24,7 +24,7 @@
         "Added pre-trip preparation checklist with localStorage progress",
         "Added three-stage lodging overview from canonical itinerary",
         "Added reservation and ticket confirmation reminders without inventing booking details",
-        "Preserved Dec 15\u201319 as explicitly open/unplanned"
+        "Preserved Dec 15–19 as explicitly open/unplanned"
       ],
       "source": "Canonical supplied itinerary data"
     },
@@ -80,6 +80,21 @@
       "release": "R2-P12",
       "type": "feature",
       "summary": "Completed the offline-first PWA foundation with versioned caching, install metadata and local trip-data caching."
+    },
+    {
+      "version": "R3-P2",
+      "date": "2026-10-06",
+      "summary": "Strengthened attraction encyclopedia context navigation and added trip-role quick facts; canonical itinerary remains the single source of truth."
+    },
+    {
+      "release": "R3-P4",
+      "date": "2026-10-06",
+      "summary": "Deepened practical information for priority destinations with source-backed hours, admission, duration, best-time guidance, addresses and verification metadata."
+    },
+    {
+      "version": "R3-P5",
+      "date": "2026-10-06",
+      "summary": "Expanded source-backed practical information for additional Kyoto/Osaka shopping, district, shrine, market, museum, park and attraction stops; unverified date-specific details remain explicitly flagged."
     }
   ],
   "releases": [

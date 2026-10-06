@@ -76,3 +76,11 @@ R3-P1 adds an individual encyclopedia record for all **87 itinerary places**. Ea
 - previous and next stop links for each itinerary occurrence
 
 Missing or time-sensitive facts are explicitly marked for verification rather than invented. The encyclopedia is generated from the canonical itinerary/place data.
+
+
+## Release 3 Pass 3 — Navigation regression fix
+Centralized navigation event handling and hardened URL/state synchronization after the Attraction Encyclopedia update. Sidebar, mobile navigation, internal links, place/date links, and browser history now share the same navigation path.
+
+
+### R3-P5 — Practical Information Expansion
+Expanded source-backed practical details for additional itinerary destinations, with explicit verification status for date-specific hours/pricing.
