@@ -291,3 +291,271 @@ code{font-family:var(--pixel);font-size:10px}
 @media(max-width:600px){.traveler-filter{display:grid;grid-template-columns:1fr}.traveler-filter-btn{text-align:left}}
 
 .offline-badge{display:inline-block;font-size:.68rem;font-weight:900;letter-spacing:.08em;border:1px solid var(--line);padding:4px 7px;margin-top:5px;color:var(--muted)}
+
+
+/* R2-P13 — Modern UI default + readable typography */
+:root {
+  --modern-bg: #f5f7fb;
+  --modern-surface: #ffffff;
+  --modern-surface-2: #eef2f7;
+  --modern-text: #172033;
+  --modern-muted: #5d687a;
+  --modern-line: #d9e0ea;
+  --modern-primary: #315cba;
+  --modern-primary-2: #4f76cc;
+  --modern-shadow: rgba(23,32,51,.10);
+  --modern-radius: 16px;
+  --modern-font: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Modern UI is the default presentation. */
+html[data-ui-mode="modern"] body {
+  font-family: var(--modern-font);
+  font-size: 16px;
+  line-height: 1.55;
+  image-rendering: auto;
+  background: var(--modern-bg);
+  background-image: none;
+  color: var(--modern-text);
+}
+html[data-ui-mode="modern"] .topbar {
+  height: 72px;
+  padding: 10px 20px;
+  background: var(--modern-surface);
+  color: var(--modern-text);
+  border-bottom: 1px solid var(--modern-line);
+  box-shadow: 0 2px 12px var(--modern-shadow);
+}
+html[data-ui-mode="modern"] .back-button,
+html[data-ui-mode="modern"] .icon-button {
+  border: 1px solid var(--modern-line);
+  background: var(--modern-surface);
+  color: var(--modern-text);
+  border-radius: 10px;
+  box-shadow: none;
+}
+html[data-ui-mode="modern"] .back-button { padding: 9px 12px; font-size: 14px; }
+html[data-ui-mode="modern"] .icon-button { width: 42px; height: 42px; font-size: 13px; font-weight: 700; }
+html[data-ui-mode="modern"] .brand { color: var(--modern-text); }
+html[data-ui-mode="modern"] .brand-mark { font-size: 30px; filter: none; }
+html[data-ui-mode="modern"] .brand strong { font-size: 16px; letter-spacing: .08em; }
+html[data-ui-mode="modern"] .brand small { font-size: 10px; letter-spacing: .16em; color: var(--modern-muted); }
+html[data-ui-mode="modern"] .topbar-search input,
+html[data-ui-mode="modern"] .search-box,
+html[data-ui-mode="modern"] .search-page-input {
+  border: 1px solid var(--modern-line);
+  border-radius: 12px;
+  background: var(--modern-surface-2);
+  color: var(--modern-text);
+  font-family: inherit;
+  font-size: 15px;
+  min-height: 44px;
+}
+html[data-ui-mode="modern"] .sidebar {
+  top: 72px;
+  width: 250px;
+  padding: 20px 14px;
+  background: var(--modern-surface);
+  border-right: 1px solid var(--modern-line);
+}
+html[data-ui-mode="modern"] .nav-item {
+  padding: 12px 13px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  font-size: 15px;
+}
+html[data-ui-mode="modern"] .nav-item:hover,
+html[data-ui-mode="modern"] .nav-item.active {
+  background: #eaf0ff;
+  border-color: #cbd8f5;
+  box-shadow: none;
+  color: #234c9e;
+}
+html[data-ui-mode="modern"] .sidebar-footer { font-size: 12px; }
+html[data-ui-mode="modern"] .main-content {
+  margin-left: 250px;
+  padding: 30px;
+  max-width: 1220px;
+}
+html[data-ui-mode="modern"] .hero {
+  background: var(--modern-surface);
+  border: 1px solid var(--modern-line);
+  border-radius: var(--modern-radius);
+  box-shadow: 0 8px 24px var(--modern-shadow);
+  padding: 26px;
+}
+html[data-ui-mode="modern"] .hero:after { opacity: .08; }
+html[data-ui-mode="modern"] .kicker {
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+html[data-ui-mode="modern"] h1 { font-size: 32px; }
+html[data-ui-mode="modern"] h2 { font-size: 23px; }
+html[data-ui-mode="modern"] h3 { font-size: 17px; }
+html[data-ui-mode="modern"] p { font-size: 15px; line-height: 1.65; }
+html[data-ui-mode="modern"] .muted { color: var(--modern-muted); }
+html[data-ui-mode="modern"] .card,
+html[data-ui-mode="modern"] .day-picker,
+html[data-ui-mode="modern"] .day-route-chip,
+html[data-ui-mode="modern"] .budget-row,
+html[data-ui-mode="modern"] .food-card,
+html[data-ui-mode="modern"] .stat,
+html[data-ui-mode="modern"] .notice {
+  border: 1px solid var(--modern-line);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px var(--modern-shadow);
+  background: var(--modern-surface);
+}
+html[data-ui-mode="modern"] .card,
+html[data-ui-mode="modern"] .day-picker { padding: 18px; }
+html[data-ui-mode="modern"] .card:hover,
+html[data-ui-mode="modern"] .stop:hover { border-color: #b8c8e9; }
+html[data-ui-mode="modern"] .pixel-divider { height: 3px; border-radius: 3px; opacity: .65; }
+html[data-ui-mode="modern"] .hero-emblem {
+  border: 1px solid var(--modern-line);
+  border-radius: 12px;
+  box-shadow: none;
+  background: var(--modern-surface-2);
+}
+html[data-ui-mode="modern"] .date-badge,
+html[data-ui-mode="modern"] .btn {
+  border: 0;
+  border-radius: 10px;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 14px;
+}
+html[data-ui-mode="modern"] .btn { background: var(--modern-primary); }
+html[data-ui-mode="modern"] .btn.secondary { background: var(--modern-surface-2); color: var(--modern-text); border: 1px solid var(--modern-line); }
+html[data-ui-mode="modern"] .stop {
+  border: 1px solid var(--modern-line);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--modern-surface);
+}
+html[data-ui-mode="modern"] .stop-title { font-size: 14px; }
+html[data-ui-mode="modern"] .stop-note { font-size: 12px; }
+html[data-ui-mode="modern"] .tag { border: 1px solid var(--modern-line); border-radius: 999px; font-size: 11px; padding: 4px 8px; }
+html[data-ui-mode="modern"] .stat strong { font-size: 22px; }
+html[data-ui-mode="modern"] .stat span { font-size: 12px; }
+html[data-ui-mode="modern"] .notice { font-size: 14px; line-height: 1.6; }
+html[data-ui-mode="modern"] .day-picker-date { font-size: 12px; }
+html[data-ui-mode="modern"] .day-picker strong { font-size: 16px; }
+html[data-ui-mode="modern"] .day-picker span:not(.day-picker-date) { font-size: 14px; }
+html[data-ui-mode="modern"] .day-picker small { font-size: 12px; }
+html[data-ui-mode="modern"] .mobile-nav {
+  background: var(--modern-surface);
+  border-top: 1px solid var(--modern-line);
+  box-shadow: 0 -4px 18px var(--modern-shadow);
+}
+html[data-ui-mode="modern"] .mobile-nav button { color: var(--modern-muted); }
+html[data-ui-mode="modern"] .mobile-nav button.active { color: var(--modern-primary); background: #f0f4ff; }
+html[data-ui-mode="modern"] .mobile-nav small { font-size: 11px; }
+
+/* Readability uplift for the alternate 16-bit mode. */
+html[data-ui-mode="pixel"] body { font-size: 15px; }
+html[data-ui-mode="pixel"] .nav-item { font-size: 14px; }
+html[data-ui-mode="pixel"] .sidebar-footer { font-size: 10px; }
+html[data-ui-mode="pixel"] .kicker { font-size: 11px; }
+html[data-ui-mode="pixel"] h1 { font-size: 30px; }
+html[data-ui-mode="pixel"] h2 { font-size: 22px; }
+html[data-ui-mode="pixel"] h3 { font-size: 16px; }
+html[data-ui-mode="pixel"] p { font-size: 14px; line-height: 1.65; }
+html[data-ui-mode="pixel"] .stop-title { font-size: 13px; }
+html[data-ui-mode="pixel"] .stop-note { font-size: 11px; }
+html[data-ui-mode="pixel"] .tag { font-size: 10px; }
+html[data-ui-mode="pixel"] .btn { font-size: 12px; }
+html[data-ui-mode="pixel"] .notice { font-size: 12px; }
+html[data-ui-mode="pixel"] .day-picker-date { font-size: .85rem; }
+html[data-ui-mode="pixel"] .day-picker strong { font-size: 1.08rem; }
+html[data-ui-mode="pixel"] .day-picker span:not(.day-picker-date) { font-size: .9rem; }
+
+[data-theme="dark"][data-ui-mode="modern"] body { background: #111827; color: #eef2f8; }
+[data-theme="dark"][data-ui-mode="modern"] .topbar,
+[data-theme="dark"][data-ui-mode="modern"] .sidebar,
+[data-theme="dark"][data-ui-mode="modern"] .card,
+[data-theme="dark"][data-ui-mode="modern"] .day-picker,
+[data-theme="dark"][data-ui-mode="modern"] .day-route-chip,
+[data-theme="dark"][data-ui-mode="modern"] .budget-row,
+[data-theme="dark"][data-ui-mode="modern"] .food-card,
+[data-theme="dark"][data-ui-mode="modern"] .stat,
+[data-theme="dark"][data-ui-mode="modern"] .notice,
+[data-theme="dark"][data-ui-mode="modern"] .hero,
+[data-theme="dark"][data-ui-mode="modern"] .stop { background: #182235; color: #eef2f8; border-color: #34435a; }
+[data-theme="dark"][data-ui-mode="modern"] .muted,
+[data-theme="dark"][data-ui-mode="modern"] .brand small,
+[data-theme="dark"][data-ui-mode="modern"] .sidebar-footer { color: #aeb9ca; }
+[data-theme="dark"][data-ui-mode="modern"] .nav-item:hover,
+[data-theme="dark"][data-ui-mode="modern"] .nav-item.active { background: #223454; border-color: #3d5c91; color: #dce7ff; }
+[data-theme="dark"][data-ui-mode="modern"] .topbar-search input,
+[data-theme="dark"][data-ui-mode="modern"] .search-box,
+[data-theme="dark"][data-ui-mode="modern"] .search-page-input,
+[data-theme="dark"][data-ui-mode="modern"] .hero-emblem,
+[data-theme="dark"][data-ui-mode="modern"] .btn.secondary { background: #202d42; color: #eef2f8; border-color: #3b4a62; }
+
+@media (max-width: 800px) {
+  html[data-ui-mode="modern"] .main-content { padding: 18px 16px 96px; }
+  html[data-ui-mode="modern"] .hero { padding: 20px; }
+  html[data-ui-mode="modern"] h1 { font-size: 27px; }
+}
+@media (max-width: 480px) {
+  html[data-ui-mode="modern"] .brand-mark { font-size: 26px; }
+  html[data-ui-mode="modern"] .brand strong { font-size: 14px; }
+  html[data-ui-mode="modern"] .brand small { font-size: 9px; }
+  html[data-ui-mode="modern"] .topbar { padding: 9px 10px; }
+  html[data-ui-mode="modern"] .topbar-search { display: none; }
+  html[data-ui-mode="modern"] h1 { font-size: 25px; }
+}
+
+/* R2-P13 Trip Tools layout hardening */
+.tools-view {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+.tools-view > * {
+  width: 100%;
+  min-width: 0;
+}
+.tools-view .grid {
+  width: 100%;
+  min-width: 0;
+}
+.tools-view .tool-panel,
+.tools-view .tool-lodging,
+.tools-view .flight-tool-card,
+.tools-view > .card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.tools-view .flight-tools-grid {
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+.tools-view .flight-tool-card {
+  min-height: 170px;
+}
+.tools-view .tool-callouts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.tools-view .tool-callouts .notice {
+  min-width: 0;
+}
+.tools-view .tool-facts {
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 900px) {
+  .tools-view .tool-callouts { grid-template-columns: 1fr; }
+  .tools-view .tool-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .tools-view .flight-tools-grid { grid-template-columns: 1fr; }
+  .tools-view .tool-facts { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 800px) {
+  .tools-view .grid-2,
+  .tools-view .grid-3 { grid-template-columns: 1fr; }
+}

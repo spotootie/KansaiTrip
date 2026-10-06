@@ -29,3 +29,16 @@ The itinerary includes a lightweight traveler lens rather than a separate group 
 - **Remaining group** — Georgia + Raph + Arth; their Osaka itinerary continues from Dec 12 onward.
 
 Dec 12 is represented as a traveler split: PR 407 applies to The Navis, while the remaining group's Osaka activities remain intact.
+
+
+## R2-P13 — Modern UI and readable typography
+
+- Modern UI is now the default presentation.
+- Existing 16-bit GBA styling remains available as an alternate UI mode.
+- UI mode is persisted in localStorage.
+- Typography and controls were increased for readability in both modes.
+- Dark/light theme continues to work independently of the UI mode.
+
+
+## R2-P13 Day Route Fix
+Fixed Day Route day-selector controls so selecting a date stays in Day Route instead of jumping to Itinerary.

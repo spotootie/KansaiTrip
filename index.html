@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#2b2140">
-  <meta name="description" content="Kansai Adventure — Kyoto × Osaka 16-bit autumn travel companion.">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="Kansai Adventure — Kyoto × Osaka modern travel companion with an optional 16-bit mode.">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -29,7 +29,8 @@
       </div>
       <div class="topbar-search"><input id="globalSearch" type="search" placeholder="Search the trip…" aria-label="Search the trip"></div>
       <div class="topbar-actions">
-        <button class="icon-button" id="themeToggle" aria-label="Toggle dark mode">◐</button>
+        <button class="icon-button mode-button" id="uiModeToggle" aria-label="Switch to 16-bit mode" title="Switch to 16-bit mode">16</button>
+        <button class="icon-button" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
         <button class="icon-button" id="menuToggle" aria-label="Open navigation">☰</button>
       </div>
     </header>
@@ -47,8 +48,8 @@
         <button class="nav-item" data-view="tools">🎒 <span>Trip Tools</span></button>
       </nav>
       <div class="sidebar-footer">
-        <span>R2 • PASS 11</span>
-        <span>16-BIT KANSAI</span>
+        <span>R2 • PASS 13</span>
+        <span class="ui-mode-label">MODERN UI</span>
         <span class="offline-badge">OFFLINE-READY</span>
         <small>App created by Isay Navarro, MD.<br>Latest version October 2026.</small>
       </div>

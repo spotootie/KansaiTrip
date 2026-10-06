@@ -9,6 +9,7 @@ import { budgetIndex } from "./data/budget-index.js";
 const main = document.querySelector("#main");
 const sidebar = document.querySelector("#sidebar");
 const themeToggle = document.querySelector("#themeToggle");
+const uiModeToggle = document.querySelector("#uiModeToggle");
 const menuToggle = document.querySelector("#menuToggle");
 const backButton = document.querySelector("#backButton");
 
@@ -225,7 +226,7 @@ function renderItinerary() {
     ? `<div class="notice">The Navis have returned to Manila. This view shows only any explicitly assigned The Navis travel events.</div>` : "";
   const remainingNotice = selected.date >= "2026-12-12" && state.travelerFilter === "remaining"
     ? `<div class="notice">Georgia, Raph, and Arth continue the Japan itinerary from Dec 12 onward.</div>` : "";
-  return `
+  return `<div class="tools-view">
     <section class="hero">
       <div class="kicker">MASTER ITINERARY</div>
       <div class="hero-title-row"><div><h1>Kyoto × Osaka</h1></div><div class="hero-emblem" aria-hidden="true">⛩️</div></div><div class="pixel-divider"></div>
@@ -301,7 +302,7 @@ function renderDayRoute() {
     </section>
     <section class="card route-day-selector">
       <div class="section-head"><div><div class="kicker">SELECT A DAY</div><h2>Build the day's route</h2></div><span class="tag">${selected.status === "open" ? "OPEN" : "IN ORDER"}</span></div>
-      <div class="day-route-picker">${days.map(d => `<button class="day-route-chip ${d.date===selected.date?'selected':''} ${d.status==='open'?'open':''}" data-date="${d.date}"><strong>${formatDate(d.date).split(',')[0]}</strong><span>${formatDate(d.date).split(',')[1].trim()}</span><small>${d.status==='open'?'OPEN':`${(d.stops||[]).length} stops`}</small></button>`).join('')}</div>
+      <div class="day-route-picker">${days.map(d => `<button class="day-route-chip ${d.date===selected.date?'selected':''} ${d.status==='open'?'open':''}" data-view="dayroute" data-date="${d.date}"><strong>${formatDate(d.date).split(',')[0]}</strong><span>${formatDate(d.date).split(',')[1].trim()}</span><small>${d.status==='open'?'OPEN':`${(d.stops||[]).length} stops`}</small></button>`).join('')}</div>
     </section>
     ${selected.status === 'open' ? `<div class="notice">This date is intentionally open in the supplied itinerary, so there is no route to construct yet.</div>` : `
     <section class="card">
@@ -623,7 +624,8 @@ function renderTools(){
         <div class="notice"><strong>Date-dependent:</strong> Universal Studios Japan and Nintendo Museum pricing/admission should be checked against the current ticket/booking information before travel.</div>
       </div>
     </section>
-    <section class="card"><div class="section-head"><div><div class="kicker">TRIP FACTS</div><h2>Quick reference</h2></div></div><div class="stats tool-facts"><div class="stat"><strong>Nov 30</strong><span>PART 1 START</span></div><div class="stat"><strong>Dec 5</strong><span>KYOTO BASE TRANSITION</span></div><div class="stat"><strong>Dec 8</strong><span>OSAKA BASE TRANSITION</span></div><div class="stat"><strong>Dec 15–19</strong><span>OPEN / UNPLANNED</span></div></div><p class="muted">The app deliberately does not create plans for Dec 15–19. Add them through the itinerary update workflow when you have confirmed plans.</p></section>`;
+    <section class="card"><div class="section-head"><div><div class="kicker">TRIP FACTS</div><h2>Quick reference</h2></div></div><div class="stats tool-facts"><div class="stat"><strong>Nov 30</strong><span>PART 1 START</span></div><div class="stat"><strong>Dec 5</strong><span>KYOTO BASE TRANSITION</span></div><div class="stat"><strong>Dec 8</strong><span>OSAKA BASE TRANSITION</span></div><div class="stat"><strong>Dec 15–19</strong><span>OPEN / UNPLANNED</span></div></div><p class="muted">The app deliberately does not create plans for Dec 15–19. Add them through the itinerary update workflow when you have confirmed plans.</p></section>
+  </div>`;
 }
 
 function renderSimple(view) {
@@ -727,6 +729,16 @@ function bindRenderedSearch() {
 }
 
 document.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view)));
+uiModeToggle?.addEventListener("click", () => {
+  const next = document.documentElement.dataset.uiMode === "modern" ? "pixel" : "modern";
+  document.documentElement.dataset.uiMode = next;
+  localStorage.setItem("kansai-ui-mode", next);
+  const modern = next === "modern";
+  uiModeToggle.setAttribute("aria-label", modern ? "Switch to 16-bit mode" : "Switch to modern UI");
+  uiModeToggle.setAttribute("title", modern ? "Switch to 16-bit mode" : "Switch to modern UI");
+  uiModeToggle.textContent = modern ? "16" : "M";
+  document.querySelector(".ui-mode-label")?.replaceChildren(document.createTextNode(modern ? "MODERN UI" : "16-BIT UI"));
+});
 themeToggle.addEventListener("click", () => {
   const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   document.documentElement.dataset.theme = next;
@@ -791,6 +803,16 @@ globalSearch?.addEventListener("keydown", e => {
 
 const savedTheme = localStorage.getItem("kansai-theme");
 document.documentElement.dataset.theme = savedTheme || "light";
+const savedUiMode = localStorage.getItem("kansai-ui-mode");
+document.documentElement.dataset.uiMode = savedUiMode || "modern";
+if (uiModeToggle) {
+  const modern = document.documentElement.dataset.uiMode === "modern";
+  uiModeToggle.textContent = modern ? "16" : "M";
+  uiModeToggle.setAttribute("aria-label", modern ? "Switch to 16-bit mode" : "Switch to modern UI");
+  uiModeToggle.setAttribute("title", modern ? "Switch to 16-bit mode" : "Switch to modern UI");
+}
+
+
 
 const initialParams = new URLSearchParams(location.search);
 state.view = initialParams.get("view") || "today";
