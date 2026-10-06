@@ -24,7 +24,7 @@
         "Added pre-trip preparation checklist with localStorage progress",
         "Added three-stage lodging overview from canonical itinerary",
         "Added reservation and ticket confirmation reminders without inventing booking details",
-        "Preserved Dec 15–19 as explicitly open/unplanned"
+        "Preserved Dec 15\u201319 as explicitly open/unplanned"
       ],
       "source": "Canonical supplied itinerary data"
     },
@@ -80,6 +80,33 @@
       "release": "R2-P12",
       "type": "feature",
       "summary": "Completed the offline-first PWA foundation with versioned caching, install metadata and local trip-data caching."
+    }
+  ],
+  "releases": [
+    {
+      "version": "R2-P14",
+      "date": "2026-10-06",
+      "changes": [
+        "Responsive layout hardening across major views",
+        "Defined grid-4 geometry and strengthened card min-width handling",
+        "Bumped service-worker cache"
+      ]
+    },
+    {
+      "version": "R2-P15",
+      "date": "2026-10-06",
+      "summary": "Navigation and interaction polish: consolidated rendered navigation handlers, isolated primary active states, preserved explicit day/place targets, and bumped offline cache."
+    },
+    {
+      "version": "R3-P1",
+      "date": "2026-10-06",
+      "summary": "Attraction Encyclopedia for all 87 itinerary places.",
+      "changes": [
+        "Added overview, practical information, web resources and trip-context navigation for every place.",
+        "Added previous/next stop context for each dated occurrence.",
+        "Added explicit verified/needs-verification handling so missing facts are not invented.",
+        "Added Wikipedia, official website where identified, and Google Maps resources."
+      ]
     }
   ]
 }

@@ -201,6 +201,15 @@ code{font-family:var(--pixel);font-size:10px}
 @media(max-width:700px){.place-controls{grid-template-columns:1fr}.place-detail-head{display:block}}
 
 /* R1-P7 — Today's Adventure */
+
+.dashboard-overview { margin: 1.25rem 0; }
+.dashboard-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
+.dashboard-card { min-width:0; min-height:130px; padding:1rem; border:1px solid var(--border); border-radius:16px; background:var(--panel); display:flex; flex-direction:column; gap:.45rem; }
+.dashboard-card strong { font-size:1.08rem; line-height:1.3; }
+.dashboard-card .muted { line-height:1.45; }
+@media (max-width: 1000px) { .dashboard-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width: 620px) { .dashboard-grid { grid-template-columns:1fr; } .dashboard-card { min-height:auto; } }
+
 .today-hero { position: relative; overflow: hidden; }
 .today-focus-card { border-width: 2px; }
 .today-actions .card-button { min-height: 150px; text-align: left; }
@@ -558,4 +567,81 @@ html[data-ui-mode="pixel"] .day-picker span:not(.day-picker-date) { font-size: .
 @media (max-width: 800px) {
   .tools-view .grid-2,
   .tools-view .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* R2-P14 — Responsive layout hardening across all views */
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Give every major view its own width boundary so nested grids cannot collapse into
+   unrelated parent layouts. */
+.itinerary-view, .dayroute-view, .places-view, .transit-view, .map-view,
+.food-view, .budget-view, .search-view { width:100%; min-width:0; }
+.itinerary-view > *, .dayroute-view > *, .places-view > *, .transit-view > *,
+.map-view > *, .food-view > *, .budget-view > *, .search-view > * { min-width:0; }
+
+.dayroute-view .grid-2,
+.food-view .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.places-view .grid-3,
+.itinerary-view .grid-3,
+.food-view .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.budget-view .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Prevent long labels and Japanese names from becoming grid min-content constraints. */
+.grid > *, .card, .day-picker, .day-route-chip, .food-card, .budget-row,
+.search-result, .route-leg-card, .tool-panel, .tool-lodging { min-width:0; }
+.grid > * { overflow-wrap:anywhere; }
+
+@media (max-width: 900px) {
+  .grid-4, .budget-view .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .places-view .grid-3, .itinerary-view .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .grid-4, .budget-view .grid-4,
+  .dayroute-view .grid-2, .food-view .grid-2,
+  .places-view .grid-3, .itinerary-view .grid-3, .food-view .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Modern mode: preserve the same geometry while using modern visual treatment. */
+html[data-ui-mode="modern"] .grid { gap:16px; }
+html[data-ui-mode="modern"] .card,
+html[data-ui-mode="modern"] .day-picker,
+html[data-ui-mode="modern"] .day-route-chip,
+html[data-ui-mode="modern"] .food-card { overflow-wrap:anywhere; }
+
+/* Release 3 — Attraction Encyclopedia */
+.place-encyclopedia { width:100%; min-width:0; }
+.encyclopedia-section { margin-top:16px; }
+.encyclopedia-facts {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:16px;
+}
+.encyclopedia-fact {
+  min-width:0;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:var(--radius,12px);
+  background:var(--surface-2,rgba(127,127,127,.06));
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.encyclopedia-fact span { font-size:.78rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; opacity:.72; }
+.encyclopedia-fact strong { overflow-wrap:anywhere; line-height:1.45; }
+.resource-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.resource-grid .btn { min-height:56px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.disabled-link { opacity:.55; cursor:not-allowed; }
+.disabled-link small { font-size:.7rem; opacity:.8; }
+.place-context-list { display:grid; gap:14px; }
+.context-occurrence { border:1px solid var(--line); border-radius:var(--radius,12px); padding:16px; min-width:0; }
+.context-occurrence-head { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+.context-occurrence-head h3 { margin:.25rem 0 0; }
+.context-neighbors { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
+.context-link { min-width:0; padding:12px; border-radius:10px; background:var(--surface-2,rgba(127,127,127,.06)); }
+.context-label { display:block; font-size:.72rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; opacity:.68; margin-bottom:5px; }
+.text-link { border:0; background:none; padding:0; color:inherit; text-align:left; font:inherit; font-weight:800; text-decoration:underline; cursor:pointer; overflow-wrap:anywhere; }
+@media (max-width:700px) {
+  .encyclopedia-facts,.resource-grid,.context-neighbors { grid-template-columns:1fr; }
+  .context-occurrence-head { flex-direction:column; }
 }

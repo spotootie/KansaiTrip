@@ -5,6 +5,7 @@ import { placeIndex } from "./data/place-index.js";
 import { locationIndex } from "./data/location-index.js";
 import { foodIndex } from "./data/food-index.js";
 import { budgetIndex } from "./data/budget-index.js";
+import { encyclopediaIndex } from "./data/encyclopedia-index.js";
 
 const main = document.querySelector("#main");
 const sidebar = document.querySelector("#sidebar");
@@ -193,10 +194,23 @@ function renderToday() {
       ${day.status === "open" ? `<div class="notice">No planned stops are recorded for this date.</div>` : `<div class="stop-list">${day.stops.slice(0, 5).map(stopMarkup).join("")}</div>${totalStops > 5 ? `<button class="btn secondary" data-view="itinerary" data-date="${day.date}">VIEW ALL ${totalStops} STOPS →</button>` : ""}`}
     </section>
 
+    <section class="dashboard-overview">
+      <div class="section-head"><div><div class="kicker">TRIP OVERVIEW</div><h2>At a glance</h2></div><span class="tag">2026</span></div>
+      <div class="dashboard-grid">
+        <div class="dashboard-card"><span class="kicker">TRIP</span><strong>Nov 30 → Dec 19</strong><span class="muted">Kyoto + Osaka</span></div>
+        <div class="dashboard-card"><span class="kicker">TRAVELERS</span><strong>${travelerLabel()}</strong><span class="muted">Use the itinerary lens to change the view.</span></div>
+        <div class="dashboard-card"><span class="kicker">NEXT TRANSITION</span><strong>Dec 12 · The Navis depart</strong><span class="muted">Carlos + Isay return to Manila; Georgia, Raph + Arth continue.</span></div>
+        <div class="dashboard-card"><span class="kicker">OPEN DAYS</span><strong>${allDays().filter(d => d.status === "open").length}</strong><span class="muted">Dec 15–19 remain intentionally unplanned.</span></div>
+      </div>
+    </section>
+
     <div class="grid grid-3 today-actions">
       <button class="card card-button" data-view="itinerary" data-date="${day.date}"><span class="kicker">PLAN</span><h3>Open itinerary</h3><p class="muted">See every day and switch dates.</p></button>
+      <button class="card card-button" data-view="dayroute" data-date="${day.date}"><span class="kicker">ROUTE</span><h3>Day Route</h3><p class="muted">See the selected day's route in order.</p></button>
       <button class="card card-button" data-view="places"><span class="kicker">EXPLORE</span><h3>Browse places</h3><p class="muted">Open reusable place records.</p></button>
       <button class="card card-button" data-view="transit"><span class="kicker">MOVE</span><h3>Transit</h3><p class="muted">Review the current route reference.</p></button>
+      <button class="card card-button" data-view="food"><span class="kicker">EAT</span><h3>Food</h3><p class="muted">Browse dining stops and food references.</p></button>
+      <button class="card card-button" data-view="tools"><span class="kicker">PREPARE</span><h3>Trip Tools</h3><p class="muted">Packing, reservations, flights, and trip facts.</p></button>
     </div>
 
     <section class="card data-status-card">
@@ -293,7 +307,7 @@ function renderDayRoute() {
     from: stop,
     to: stops[i + 1]
   }));
-  return `
+  return `<div class="dayroute-view">
     <section class="hero">
       <div class="kicker">DAY ROUTE PLANNER</div>
       <div class="hero-title-row"><div><h1>${escapeHtml(selected.title)}</h1></div><div class="hero-emblem" aria-hidden="true">🧭</div></div>
@@ -353,115 +367,81 @@ function renderPlaces() {
 
 function renderPlaceDetail(id) {
   const p = placeById(id);
-  const occurrences = placeOccurrences(id);
+  const e = encyclopediaIndex[id] || {};
+  const occurrences = e.occurrences || placeOccurrences(id);
   const partLabel = p.part === "part1" ? "The Navis" : p.part === "part2" ? "Group" : "Shared";
+  const practical = e.practical || {};
+  const resources = e.resources || {};
+  const location = e.location || {};
+  const resourceButton = (label, href, disabled=false) => disabled || !href
+    ? `<span class="btn secondary disabled-link" aria-disabled="true">${label}<small>Not identified</small></span>`
+    : `<a class="btn secondary" href="${href}" target="_blank" rel="noopener">${label} ↗</a>`;
+  const contextPlace = (kind, item) => item?.placeId
+    ? `<div class="context-link"><span class="context-label">${kind}</span><button class="text-link" data-place="${item.placeId}">${escapeHtml(item.title)}</button></div>`
+    : `<div class="context-link"><span class="context-label">${kind}</span><span class="muted">${item?.title ? escapeHtml(item.title) : 'None — this is the first/last stop in this itinerary segment.'}</span></div>`;
+
   return `
-    <section class="hero">
-      <button class="btn secondary" data-view="places">← ALL PLACES</button>
-      <div class="place-detail-head">
-        <div><div class="kicker">${p.category.toUpperCase()} · ${p.city.toUpperCase()}</div><h1>${p.name}</h1><div class="pixel-divider"></div></div>
-        <div class="hero-emblem" aria-hidden="true">${icons[p.category] || "📍"}</div>
-      </div>
-      <div class="tag-row"><span class="tag">${partLabel}</span>${p.priceJPY ? `<span class="tag">¥${p.priceJPY.toLocaleString()}</span>` : ""}<span class="tag">${occurrences.length} itinerary appearance${occurrences.length===1?"":"s"}</span></div>
-    </section>
-    <section class="card">
-      <div class="section-head"><div><div class="kicker">TRIP CONTEXT</div><h2>Where this fits</h2></div></div>
-      <p class="muted">This record is linked directly to the itinerary. When you update Wanderlog later, its appearances can be updated without changing the app interface.</p>
-      ${occurrences.length ? `<div class="place-occurrences">${occurrences.map(o=>`<button class="occurrence" data-date="${o.date}" data-view="itinerary"><strong>${formatDate(o.date)}</strong><span>${o.dayTitle}</span><small>${o.stopTitle}${o.note ? ` · ${o.note}` : ""}</small></button>`).join("")}</div>` : `<div class="notice">This place exists in the place database but is not currently linked to a dated itinerary stop.</div>`}
-    </section>
-    <section class="card place-source-card">
-      <div class="section-head"><div><div class="kicker">DATA RECORD</div><h2>Source & status</h2></div><span class="tag">${p.source || "trip data"}</span></div>
-      <p class="muted">Place ID: <code>${p.id}</code></p>
-      ${p.location ? `<div class="verified-location"><div class="kicker">VERIFIED LOCATION</div><strong>${escapeHtml(p.location.address)}</strong><small>Coordinates: ${p.location.lat.toFixed(5)}, ${p.location.lng.toFixed(5)}</small><small>${escapeHtml(p.location.verification)}</small><a class="btn secondary" href="${p.location.mapsQuery}" target="_blank" rel="noopener">OPEN IN GOOGLE MAPS ↗</a></div>` : `<div class="notice">Exact coordinates have not yet been verified for this place. The app will not display guessed coordinates.</div>`}
-    </section>`;
-}
+    <div class="place-encyclopedia">
+      <section class="hero">
+        <button class="btn secondary" data-view="places">← ALL PLACES</button>
+        <div class="place-detail-head">
+          <div><div class="kicker">ATTRACTION ENCYCLOPEDIA · ${p.category.toUpperCase()} · ${p.city.toUpperCase()}</div><h1>${escapeHtml(p.name)}</h1><div class="pixel-divider"></div></div>
+          <div class="hero-emblem" aria-hidden="true">${icons[p.category] || "📍"}</div>
+        </div>
+        <div class="tag-row"><span class="tag">${partLabel}</span>${p.priceJPY ? `<span class="tag">¥${p.priceJPY.toLocaleString()}</span>` : ""}<span class="tag">${occurrences.length} itinerary appearance${occurrences.length===1?"":"s"}</span></div>
+      </section>
 
-function placesForTransit() {
-  return tripData.places || [];
-}
+      <section class="card encyclopedia-section">
+        <div class="section-head"><div><div class="kicker">OVERVIEW</div><h2>Why it's on your itinerary</h2></div></div>
+        <p>${escapeHtml(e.overview || `A ${p.category} stop in ${p.city} included in your Kansai itinerary.`)}</p>
+      </section>
 
-function renderTransit() {
-  const places = [...tripData.places].sort((a,b) => a.name.localeCompare(b.name));
-  const from = state.transitFrom || "";
-  const to = state.transitTo || "";
-  const fromName = state.transitFromName || places.find(p => p.id === from)?.name || "";
-  const toName = state.transitToName || places.find(p => p.id === to)?.name || "";
-  const saved = tripData.transit.referenceRoutes.find(r =>
-    (r.from.toLowerCase() === fromName.toLowerCase() && r.to.toLowerCase() === toName.toLowerCase()) ||
-    (r.from.toLowerCase() === toName.toLowerCase() && r.to.toLowerCase() === fromName.toLowerCase())
-  );
-  const routeStatus = from && to && from !== to ? (saved ? "reference" : "unavailable") : "empty";
-  return `
-    <section class="hero">
-      <div class="kicker">POINT-TO-POINT TRAVEL</div>
-      <div class="hero-title-row"><div><h1>How do I get there?</h1></div><div class="hero-emblem" aria-hidden="true">🚆</div></div><div class="pixel-divider"></div>
-      <p class="muted">Choose two places from the trip to compare against the app's verified route references. Live navigation is not assumed.</p>
-    </section>
-    <section class="card route-planner">
-      <div class="section-head"><div><div class="kicker">ROUTE PLANNER</div><h2>From → To</h2></div><span class="tag">OFFLINE-SAFE</span></div>
-      <div class="route-fields">
-        <label><span>FROM</span><select id="transitFrom"><option value="">Choose a place…</option>${places.map(p=>`<option value="${p.id}" ${p.id===from?"selected":""}>${escapeHtml(p.name)} — ${escapeHtml(p.city)}</option>`).join("")}</select></label>
-        <div class="route-arrow" aria-hidden="true">→</div>
-        <label><span>TO</span><select id="transitTo"><option value="">Choose a place…</option>${places.map(p=>`<option value="${p.id}" ${p.id===to?"selected":""}>${escapeHtml(p.name)} — ${escapeHtml(p.city)}</option>`).join("")}</select></label>
-      </div>
-      ${routeStatus === "reference" ? `<div class="route-result"><span class="tag">${saved.label}</span><h3>${escapeHtml(saved.from)} → ${escapeHtml(saved.to)}</h3><p><strong>${escapeHtml(saved.duration)}</strong> · ${typeof saved.fareJPY === "number" ? "¥"+saved.fareJPY.toLocaleString() : escapeHtml(saved.fareJPY)}</p><p class="muted">Modes: ${saved.mode.join(" + ")}</p><div class="route-steps">${(saved.steps || []).map((step,i)=>`<div class="route-step"><span class="route-step-number">${i+1}</span><div><strong>${escapeHtml(step.title)}</strong><p>${escapeHtml(step.detail)}</p></div></div>`).join("")}</div><div class="notice">${escapeHtml(saved.verification || "Stored reference sequence, not live navigation.")} Check the operator's current timetable, platform and service status on the day.</div></div>`
-      : routeStatus === "unavailable" ? `<div class="notice">No saved route reference matches this pair yet. The app will not invent a transfer sequence. A later transit-data pass can add a verified route here.</div>`
-      : `<div class="notice">Select an origin and destination to check the stored route references.</div>`}
-    </section>
+      <section class="card encyclopedia-section">
+        <div class="section-head"><div><div class="kicker">PRACTICAL INFORMATION</div><h2>Before you go</h2></div></div>
+        <div class="encyclopedia-facts">
+          <div class="encyclopedia-fact"><span>Opening hours</span><strong>${escapeHtml(practical.hours || 'Verify before visit')}</strong></div>
+          <div class="encyclopedia-fact"><span>Admission</span><strong>${escapeHtml(practical.admission || 'Verify before visit')}</strong></div>
+          <div class="encyclopedia-fact"><span>Recommended visit</span><strong>${escapeHtml(practical.duration || 'About 1–2 hours')}</strong></div>
+          <div class="encyclopedia-fact"><span>Location</span><strong>${escapeHtml(location.label || `${p.city}, Japan`)}</strong>${location.verified ? '<small class="verified-chip">✓ location verified</small>' : '<small class="muted">Exact location not yet verified</small>'}</div>
+          <div class="encyclopedia-fact"><span>Best time to visit</span><strong>${escapeHtml(practical.best || 'Follow the itinerary timing')}</strong></div>
+        </div>
+        <div class="notice">${escapeHtml(e.sourceNote || 'Verify hours, admission and conditions before travel. The app does not invent missing facts.')}</div>
+      </section>
 
-    <section class="section-head"><div><div class="kicker">SAVED ROUTES</div><h2>Core trip transfers</h2></div></section>
-    <div class="grid grid-2">
-      ${tripData.transit.referenceRoutes.map(r => `<button class="card card-button transit-reference" data-transit-from-name="${escapeHtml(r.from)}" data-transit-to-name="${escapeHtml(r.to)}"><span class="tag">${r.label}</span><h3>${escapeHtml(r.from)} → ${escapeHtml(r.to)}</h3><p>${escapeHtml(r.duration)} · ${typeof r.fareJPY === "number" ? "¥"+r.fareJPY.toLocaleString() : escapeHtml(r.fareJPY)}</p><small class="muted">${r.mode.join(" + ")}</small></button>`).join("")}
-    </div>
-    <div class="section-head"><div><div class="kicker">FARE REFERENCE</div><h2>Reference values</h2></div></div>
-    <div class="grid grid-3">
-      ${tripData.transit.fareReferences.map(f => `<div class="card"><h3>${escapeHtml(f.name)}</h3><p>${escapeHtml(f.fareJPY)}</p></div>`).join("")}
+      <section class="card encyclopedia-section">
+        <div class="section-head"><div><div class="kicker">WEB RESOURCES</div><h2>Useful links</h2></div></div>
+        <div class="resource-grid">
+          ${resourceButton('WIKIPEDIA', resources.wikipedia)}
+          ${resourceButton('OFFICIAL WEBSITE', resources.official, !resources.official)}
+          ${resourceButton('GOOGLE MAPS', resources.maps)}
+        </div>
+      </section>
+
+      <section class="card encyclopedia-section">
+        <div class="section-head"><div><div class="kicker">TRIP CONTEXT</div><h2>Where this fits</h2></div></div>
+        <p class="muted">The place is linked directly to the canonical itinerary. Use the surrounding-stop links to move through the day without returning to the main itinerary.</p>
+        <div class="place-context-list">
+          ${occurrences.length ? occurrences.map((o,i)=>`
+            <article class="context-occurrence">
+              <div class="context-occurrence-head">
+                <div><span class="kicker">VISIT ${i+1}</span><h3>You're visiting here on ${formatDate(o.date)}.</h3></div>
+                <span class="tag">STOP ${o.order}</span>
+              </div>
+              <p class="muted">${escapeHtml(o.dayTitle)}${o.note ? ` · ${escapeHtml(o.note)}` : ''}</p>
+              <div class="context-neighbors">
+                ${contextPlace('Previous stop', o.previous)}
+                ${contextPlace('Next stop', o.next)}
+              </div>
+              <button class="btn secondary" data-date="${o.date}" data-view="itinerary">OPEN THIS DAY ↗</button>
+            </article>`).join('') : `<div class="notice">This place exists in the place database but is not currently linked to a dated itinerary stop.</div>`}
+        </div>
+      </section>
+
+      <section class="card encyclopedia-section">
+        <div class="section-head"><div><div class="kicker">LOCATION</div><h2>Get there</h2></div></div>
+        ${location.verified && location.coordinates ? `<div class="verified-location"><strong>${escapeHtml(location.label)}</strong><small>Coordinates: ${location.coordinates.lat.toFixed(5)}, ${location.coordinates.lng.toFixed(5)}</small><a class="btn secondary" href="${resources.maps}" target="_blank" rel="noopener">OPEN IN GOOGLE MAPS ↗</a></div>` : `<div class="notice">Exact coordinates are not yet verified for this place. Google Maps search is provided without pretending that the app has a precise verified pin.</div>`}
+      </section>
     </div>`;
-}
-
-function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>'"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));
-}
-
-function globalSearchItems() {
-  const items = [];
-  allDays().forEach(day => {
-    (day.stops || []).forEach(stop => items.push({
-      kind:"itinerary", icon:icons[stop.type] || "📍", title:stop.title,
-      meta:`${formatDate(day.date)} · ${day.city}`, search:[stop.title, stop.note, stop.alternative, day.title, day.city].filter(Boolean).join(" ").toLowerCase(),
-      action:`data-view="itinerary" data-date="${day.date}"`
-    }));
-  });
-  tripData.places.forEach(p => items.push({
-    kind:"place", icon:icons[p.category] || "📍", title:p.name,
-    meta:`${p.city} · ${p.category}`, search:[p.name,p.city,p.category,p.id, ...(p.category === "food" ? ["food","restaurant","cafe","dining"] : [])].join(" ").toLowerCase(),
-    action:`data-view="places" data-place="${p.id}"`
-  }));
-  tripData.parts.forEach(part => items.push({
-    kind:"day", icon:"🗓", title:part.title, meta:`${part.startDate} → ${part.endDate}`,
-    search:[part.title,part.description].join(" ").toLowerCase(), action:`data-view="itinerary" data-date="${part.startDate}"`
-  }));
-  return items;
-}
-
-function renderSearch(query="") {
-  const q = query.trim().toLowerCase();
-  const all = globalSearchItems();
-  const results = q ? all.filter(x => x.search.includes(q)).slice(0, 40) : [];
-  return `
-    <section class="hero search-hero">
-      <div class="kicker">TRIP-WIDE SEARCH</div>
-      <div class="hero-title-row"><div><h1>Search the trip</h1></div><div class="hero-emblem" aria-hidden="true">🔎</div></div>
-      <div class="pixel-divider"></div>
-      <p class="muted">Search itinerary stops, places, food, cities, categories, notes, and trip parts.</p>
-      <input class="search-box search-page-input" id="searchPageInput" value="${escapeHtml(query)}" placeholder="Try “Nintendo”, “Kyoto”, “ramen”, or “Dec 10”" aria-label="Search the trip">
-    </section>
-    ${q ? `<div class="section-head"><div><div class="kicker">RESULTS</div><h2>${results.length} match${results.length===1?"":"es"}</h2></div></div>
-      ${results.length ? `<div class="search-results">${results.map(r=>`<button class="card search-result" ${r.action}><span class="search-result-icon">${r.icon}</span><span><strong>${escapeHtml(r.title)}</strong><small>${escapeHtml(r.meta)}</small></span><span>→</span></button>`).join("")}</div>` : `<div class="notice">No matches yet. Try a place name, city, food category, or itinerary stop.</div>`}` : `<div class="card"><h3>Search across the whole trip</h3><p class="muted">The same reusable place records and itinerary data power these results, so future Wanderlog updates will automatically be searchable.</p></div>`}`;
-}
-
-function mapSearchUrl(name) {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + " Japan")}`;
 }
 
 function renderMap() {
@@ -537,7 +517,7 @@ function renderFood() {
       <div class="food-filters"><select id="foodCity"><option value="">All cities</option>${cities.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}</select><select id="foodMeal"><option value="">All meal contexts</option>${meals.map(m=>`<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`).join('')}</select></div>
       <div id="foodGrid" class="grid grid-2">${foodCards(foodIndex.entries)}</div>
     </section>
-    <section class="card"><div class="section-head"><div><div class="kicker">PRACTICAL NOTE</div><h2>Use the itinerary as the source of truth</h2></div></div><p class="muted">Restaurant hours, queues, menus and reservations can change. The app stores the trip's planned food stops, while current operating information should be checked close to the visit. Reservation notes already present in the itinerary are surfaced on the relevant card.</p></section>`;
+    <section class="card"><div class="section-head"><div><div class="kicker">PRACTICAL NOTE</div><h2>Use the itinerary as the source of truth</h2></div></div><p class="muted">Restaurant hours, queues, menus and reservations can change. The app stores the trip's planned food stops, while current operating information should be checked close to the visit. Reservation notes already present in the itinerary are surfaced on the relevant card.</p></section></div>`;
 }
 
 function foodMealContext(entry) {
@@ -559,11 +539,11 @@ function renderBudget(){
   const entries=budgetIndex.entries;
   const total=entries.reduce((s,e)=>s+e.amountJPY,0), food=entries.filter(e=>e.category==='food').reduce((s,e)=>s+e.amountJPY,0), attractions=entries.filter(e=>e.category==='attraction').reduce((s,e)=>s+e.amountJPY,0), transit=entries.filter(e=>e.category==='transit').reduce((s,e)=>s+e.amountJPY,0);
   const days=[...new Set(entries.map(e=>e.date))].sort();
-  return `<section class="hero"><div class="kicker">TRIP BUDGET & MONEY</div><div class="hero-title-row"><div><h1>Know your yen</h1></div><div class="hero-emblem" aria-hidden="true">¥</div></div><div class="pixel-divider"></div><p class="muted">Known price references from the itinerary, separated from estimates and live navigation costs.</p></section>
+  return `<div class="budget-view"><section class="hero"><div class="kicker">TRIP BUDGET & MONEY</div><div class="hero-title-row"><div><h1>Know your yen</h1></div><div class="hero-emblem" aria-hidden="true">¥</div></div><div class="pixel-divider"></div><p class="muted">Known price references from the itinerary, separated from estimates and live navigation costs.</p></section>
   <section class="grid grid-4 budget-stats"><div class="card"><div class="kicker">KNOWN REFERENCES</div><strong class="big-number">${yen(total)}</strong><p class="muted">${php(total)} at the stored FX reference</p></div><div class="card"><div class="kicker">FOOD</div><strong class="big-number">${yen(food)}</strong><p class="muted">${php(food)}</p></div><div class="card"><div class="kicker">ATTRACTIONS</div><strong class="big-number">${yen(attractions)}</strong><p class="muted">${php(attractions)}</p></div><div class="card"><div class="kicker">TRANSIT</div><strong class="big-number">${yen(transit)}</strong><p class="muted">${php(transit)}</p></div></section>
   <section class="card"><div class="section-head"><div><div class="kicker">CURRENCY</div><h2>JPY → PHP</h2></div><span class="tag">1 JPY = ₱${budgetIndex.fx.jpyToPhp.toFixed(4)}</span></div><p class="muted">${budgetIndex.fx.label}. This is a conversion reference, not a guaranteed card/bank settlement rate.</p><div class="budget-converter"><label>Amount in yen<input id="budgetAmount" type="number" min="0" step="100" value="1000"></label><div class="budget-convert-output"><span>PHP reference</span><strong id="budgetPhp">${php(1000)}</strong></div></div></section>
   <section class="card"><div class="section-head"><div><div class="kicker">KNOWN COSTS</div><h2>Trip price references</h2></div><span class="tag">${entries.length} ITEMS</span></div><div class="budget-table">${entries.map(e=>`<div class="budget-row"><div><strong>${escapeHtml(e.name)}</strong><small>${formatDate(e.date)} · ${escapeHtml(e.category)}${e.note?` · ${escapeHtml(e.note)}`:''}</small></div><div class="budget-price"><strong>${yen(e.amountJPY)}</strong><span>${php(e.amountJPY)}</span><em>${escapeHtml(e.status)}</em></div></div>`).join('')}</div></section>
-  <section class="card"><div class="section-head"><div><div class="kicker">IMPORTANT</div><h2>What this total means</h2></div></div><p class="muted">The total is only the sum of prices currently stored in the app. It is not your full trip budget: hotels, many meals, shopping, local transit and date-dependent tickets may not have a confirmed price yet. Unknown costs are intentionally excluded rather than guessed.</p></section>`;
+  <section class="card"><div class="section-head"><div><div class="kicker">IMPORTANT</div><h2>What this total means</h2></div></div><p class="muted">The total is only the sum of prices currently stored in the app. It is not your full trip budget: hotels, many meals, shopping, local transit and date-dependent tickets may not have a confirmed price yet. Unknown costs are intentionally excluded rather than guessed.</p></section></div>`;
 }
 
 function renderTools(){
@@ -643,7 +623,7 @@ function render() {
   const canGoBack = state.history.length > 0;
   backButton.classList.toggle("visible", canGoBack);
   backButton.setAttribute("aria-hidden", String(!canGoBack));
-  document.querySelectorAll("[data-view]").forEach(el => el.classList.toggle("active", el.dataset.view === state.view));
+  document.querySelectorAll(".sidebar .nav-item, .mobile-nav [data-view]").forEach(el => el.classList.toggle("active", el.dataset.view === state.view));
   main.innerHTML =
     state.view === "today" ? renderToday() :
     state.view === "itinerary" ? renderItinerary() :
@@ -657,9 +637,11 @@ function render() {
     state.view === "search" ? renderSearch(new URLSearchParams(location.search).get("q") || "") :
     renderSimple(state.view);
 
-  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {date: btn.dataset.date || null})));
+  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {
+    date: btn.dataset.date || null,
+    place: btn.dataset.place || null
+  })));
   main.querySelectorAll("[data-part]").forEach(btn => btn.addEventListener("click", () => setView("itinerary")));
-  main.querySelectorAll("[data-date]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view || "itinerary", {date: btn.dataset.date})));
   main.querySelectorAll("[data-traveler-filter]").forEach(btn => btn.addEventListener("click", () => { state.travelerFilter = btn.dataset.travelerFilter; localStorage.setItem("kansai-traveler-filter", state.travelerFilter); render(); }));
   if (state.view === "food") bindFoodFilters();
   if (state.view === "budget") {
@@ -686,6 +668,7 @@ function render() {
     render();
   }));
   main.querySelectorAll("[data-place]").forEach(btn => {
+    if (btn.dataset.view) return;
     const open = () => setView("places", {place: btn.dataset.place});
     btn.addEventListener("click", open);
     btn.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });

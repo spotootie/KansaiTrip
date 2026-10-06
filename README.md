@@ -42,3 +42,37 @@ Dec 12 is represented as a traveler split: PR 407 applies to The Navis, while th
 
 ## R2-P13 Day Route Fix
 Fixed Day Route day-selector controls so selecting a date stays in Day Route instead of jumping to Itinerary.
+
+
+## R2-P14 — Responsive layout hardening
+- Added explicit `grid-4` responsive geometry.
+- Added view-specific layout boundaries for Day Route and Budget and hardening rules for major card grids.
+- Prevented long labels/names from imposing min-content widths on cards.
+- Added mobile/tablet breakpoints for major grid families.
+- Service-worker cache bumped to R2-P14.
+
+
+## R2-P15 — Navigation & interaction polish
+- Consolidated rendered navigation handlers so each action has one navigation path.
+- Primary navigation active state is isolated from internal card/action buttons.
+- Place/date navigation preserves explicit `data-view`, `data-date`, and `data-place` targets.
+- Service-worker cache bumped to R2-P15.
+
+
+## R2-P18 — Trip Overview Dashboard
+- Expanded Today’s Adventure into a trip overview dashboard.
+- Shows trip span, traveler lens, Dec 12 transition, and open-date status.
+- Added direct shortcuts to Day Route, Food, and Trip Tools.
+- Dashboard remains derived from canonical itinerary data.
+- Service-worker cache bumped to R2-P18.
+
+## Release 3 — Attraction Encyclopedia
+
+R3-P1 adds an individual encyclopedia record for all **87 itinerary places**. Each record provides:
+- overview and itinerary purpose
+- practical information: hours, admission, visit duration, location and best time
+- Wikipedia, official website where identified, and Google Maps resources
+- dated trip context
+- previous and next stop links for each itinerary occurrence
+
+Missing or time-sensitive facts are explicitly marked for verification rather than invented. The encyclopedia is generated from the canonical itinerary/place data.

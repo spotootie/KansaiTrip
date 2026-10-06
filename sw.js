@@ -1,4 +1,4 @@
-const CACHE_NAME = "kansai-adventure-r2-p13-v1";
+const CACHE_NAME = "kansai-adventure-r3-p1-v1";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -11,12 +11,14 @@ const APP_SHELL = [
   "./data/location-index.js",
   "./data/food-index.js",
   "./data/budget-index.js",
+  "./data/encyclopedia-index.js",
   "./data/trip.json",
   "./data/trip-meta.js",
   "./data/place-index.json",
   "./data/location-index.json",
   "./data/food-index.json",
   "./data/budget-index.json",
+  "./data/encyclopedia-index.json",
   "./data/trip-schema.json",
   "./data/update-log.json",
   "./icons/icon.svg"
