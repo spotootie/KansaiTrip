@@ -652,7 +652,10 @@ function render() {
     state.view === "search" ? renderSearch(new URLSearchParams(location.search).get("q") || "") :
     renderSimple(state.view);
 
-  // Main-area navigation is handled once by the delegated listener below.
+  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {
+    date: btn.dataset.date || null,
+    place: btn.dataset.place || null
+  })));
   main.querySelectorAll("[data-part]").forEach(btn => btn.addEventListener("click", () => setView("itinerary")));
   main.querySelectorAll("[data-traveler-filter]").forEach(btn => btn.addEventListener("click", () => { state.travelerFilter = btn.dataset.travelerFilter; localStorage.setItem("kansai-traveler-filter", state.travelerFilter); render(); }));
   if (state.view === "food") bindFoodFilters();
@@ -711,14 +714,8 @@ function render() {
   });
 }
 
-main.addEventListener("click", event => {
-  const btn = event.target.closest?.("[data-view]");
-  if (!btn) return;
-  event.preventDefault();
-  setView(btn.dataset.view, {date: btn.dataset.date || null, place: btn.dataset.place || null});
-});
-
 function bindRenderedSearch() {
+  main.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view, {date: btn.dataset.date || null, place: btn.dataset.place || null})));
   main.querySelectorAll("[data-map-city]").forEach(btn => btn.addEventListener("click", () => {
     const city = btn.dataset.mapCity;
     const matches = tripData.places.filter(p => p.city.toLowerCase().includes(city.toLowerCase() === "osaka bay" ? "osaka" : city.toLowerCase()));
@@ -729,12 +726,7 @@ function bindRenderedSearch() {
   if (input) { input.focus({preventScroll:true}); input.setSelectionRange(input.value.length,input.value.length); input.addEventListener("input", () => { const q=input.value; const params=new URLSearchParams(location.search); params.set("view","search"); if(q) params.set("q",q); else params.delete("q"); history.replaceState({view:"search",q},"",`?${params.toString()}`); main.innerHTML=renderSearch(q); bindRenderedSearch(); }); }
 }
 
-document.addEventListener("click", event => {
-  const btn = event.target.closest?.("[data-view]");
-  if (!btn || btn.closest("#main")) return;
-  event.preventDefault();
-  setView(btn.dataset.view, {date: btn.dataset.date || null, place: btn.dataset.place || null});
-});
+document.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view)));
 uiModeToggle?.addEventListener("click", () => {
   const next = document.documentElement.dataset.uiMode === "modern" ? "pixel" : "modern";
   document.documentElement.dataset.uiMode = next;
