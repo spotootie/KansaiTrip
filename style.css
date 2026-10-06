@@ -504,9 +504,31 @@ html[data-ui-mode="pixel"] .day-picker span:not(.day-picker-date) { font-size: .
 [data-theme="dark"][data-ui-mode="modern"] .btn.secondary { background: #202d42; color: #eef2f8; border-color: #3b4a62; }
 
 @media (max-width: 800px) {
-  html[data-ui-mode="modern"] .main-content { padding: 18px 16px 96px; }
+  html[data-ui-mode="modern"] .main-content {
+    margin-left: 0;
+    max-width: none;
+    width: 100%;
+    padding: 18px 16px 96px;
+  }
+  html[data-ui-mode="modern"] .sidebar { display: none; }
+  html[data-ui-mode="modern"] .mobile-nav { display: grid; }
   html[data-ui-mode="modern"] .hero { padding: 20px; }
   html[data-ui-mode="modern"] h1 { font-size: 27px; }
+}
+
+@media (max-width: 600px) {
+  html[data-ui-mode="modern"] .mobile-nav {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  html[data-ui-mode="modern"] .mobile-nav button {
+    min-width: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    white-space: nowrap;
+  }
+  html[data-ui-mode="modern"] .mobile-nav small {
+    font-size: 10px;
+  }
 }
 @media (max-width: 480px) {
   html[data-ui-mode="modern"] .brand-mark { font-size: 26px; }
