@@ -74,18 +74,23 @@ function dayByDate(date) {
 
 function travelerMatchesFilter(day, filter = state.travelerFilter) {
   if (filter === "all") return true;
-  const target = filter === "navis" ? "The Navis" : "Remaining group";
-  const dayGroup = day.travelerGroup || "";
-  if (filter === "navis" && (dayGroup === "The Navis" || dayGroup === "Group" || dayGroup.includes("The Navis"))) return true;
-  if (filter === "remaining" && (dayGroup === "Group" || dayGroup === "Remaining group" || dayGroup.includes("Group"))) return true;
-  return (day.stops || []).some(stop => stop.flight?.travelerGroup === target);
+  const travelers = day.travelers || [];
+  if (filter === "navis") return travelers.includes("Carlos") || travelers.includes("Isay") || day.navisDeparture;
+  if (filter === "remaining") return travelers.includes("Georgia") || travelers.includes("Raph") || travelers.includes("Arth");
+  return false;
 }
 
 function stopMatchesTraveler(stop, day, filter = state.travelerFilter) {
   if (filter === "all") return true;
   if (stop.flight?.travelerGroup === "The Navis") return filter === "navis";
-  if (day.travelerGroup === "The Navis") return filter === "navis";
-  return filter === "remaining";
+  if (stop.flight?.travelerGroup === "Remaining group") return filter === "remaining";
+  // On the departure date, The Navis' itinerary ends with their confirmed
+  // flight. The remaining Osaka activities belong only to the travelers who
+  // continue in Japan.
+  if (filter === "navis" && day.navisDeparture) return false;
+  // Otherwise, an unassigned stop is shared by the travelers listed for that
+  // day.
+  return travelerMatchesFilter(day, filter);
 }
 
 function travelerLabel(filter = state.travelerFilter) {
@@ -307,7 +312,7 @@ function renderItinerary() {
         </div>
         <div class="day-picker-grid">
           ${partDays.map(day => `
-            <button class="day-picker ${day.date === selected.date ? "selected" : ""} ${day.status === "open" ? "open" : ""}" data-date="${day.date}">
+            <button class="day-picker ${day.date === selected.date ? "selected" : ""} ${day.status === "open" ? "open" : ""}" data-view="itinerary" data-date="${day.date}">
               <span class="day-picker-date">${formatDate(day.date).split(",")[0]}</span>
               <strong>${formatDate(day.date).split(",")[1].trim()}</strong>
               <span>${day.city}</span>
