@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kansai-adventure-r3-p8-mobile-fix';
+const CACHE_NAME = 'kansai-adventure-r3-p9-home-art';
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -21,7 +21,11 @@ const APP_SHELL = [
   "./data/encyclopedia-index.json",
   "./data/trip-schema.json",
   "./data/update-log.json",
-  "./icons/icon.svg"
+  "./icons/icon.svg",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/apple-touch-icon.png",
+  "./assets/kansai-adventure-home.jpg"
 ];
 
 self.addEventListener("install", event => {

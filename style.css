@@ -59,6 +59,7 @@ button { font: inherit; color: inherit; }
 .back-button.visible { display:inline-flex; }
 .brand { border:0; background:none; display:flex; align-items:center; gap:10px; cursor:pointer; text-align:left; color:inherit; }
 .brand-mark { font-size: 30px; filter: saturate(.8); }
+.brand-mark-image { width:34px; height:34px; object-fit:cover; border-radius:8px; border:1px solid rgba(255,255,255,.25); flex:0 0 auto; }
 .brand strong { display:block; letter-spacing:2px; font-size:15px; }
 .brand small { display:block; font-size:9px; letter-spacing:3px; opacity:.8; }
 .topbar-actions { display:flex; gap:8px; }
@@ -211,6 +212,27 @@ code{font-family:var(--pixel);font-size:10px}
 @media (max-width: 620px) { .dashboard-grid { grid-template-columns:1fr; } .dashboard-card { min-height:auto; } }
 
 .today-hero { position: relative; overflow: hidden; }
+.home-adventure-image {
+  display:block;
+  width:100%;
+  max-width:760px;
+  max-height:430px;
+  margin:0 auto 20px;
+  object-fit:contain;
+  object-position:center;
+  border-radius:14px;
+  border:2px solid var(--line);
+  background:var(--paper-2);
+}
+html[data-ui-mode="modern"] .home-adventure-image {
+  border:1px solid var(--modern-line);
+  border-radius:16px;
+  box-shadow:0 6px 20px var(--modern-shadow);
+}
+@media (max-width:600px) {
+  .home-adventure-image { max-height:none; margin-bottom:16px; }
+}
+
 .today-focus-card { border-width: 2px; }
 .today-actions .card-button { min-height: 150px; text-align: left; }
 .today-actions .card-button h3 { margin-bottom: .4rem; }
@@ -347,6 +369,7 @@ html[data-ui-mode="modern"] .back-button { padding: 9px 12px; font-size: 14px; }
 html[data-ui-mode="modern"] .icon-button { width: 42px; height: 42px; font-size: 13px; font-weight: 700; }
 html[data-ui-mode="modern"] .brand { color: var(--modern-text); }
 html[data-ui-mode="modern"] .brand-mark { font-size: 30px; filter: none; }
+html[data-ui-mode="modern"] .brand-mark-image { width:36px; height:36px; border-radius:9px; border:1px solid var(--modern-line); }
 html[data-ui-mode="modern"] .brand strong { font-size: 16px; letter-spacing: .08em; }
 html[data-ui-mode="modern"] .brand small { font-size: 10px; letter-spacing: .16em; color: var(--modern-muted); }
 html[data-ui-mode="modern"] .topbar-search input,
@@ -532,6 +555,7 @@ html[data-ui-mode="pixel"] .day-picker span:not(.day-picker-date) { font-size: .
 }
 @media (max-width: 480px) {
   html[data-ui-mode="modern"] .brand-mark { font-size: 26px; }
+  html[data-ui-mode="modern"] .brand-mark-image { width:32px; height:32px; }
   html[data-ui-mode="modern"] .brand strong { font-size: 14px; }
   html[data-ui-mode="modern"] .brand small { font-size: 9px; }
   html[data-ui-mode="modern"] .topbar { padding: 9px 10px; }

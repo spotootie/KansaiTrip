@@ -208,6 +208,7 @@ function renderToday() {
 
   return `
     <section class="hero today-hero">
+      <img class="home-adventure-image" src="assets/kansai-adventure-home.jpg" alt="Five travelers in a colorful autumn Kyoto scene" loading="eager" decoding="async">
       <div class="kicker">16-BIT KANSAI ADVENTURE</div>
       <div class="hero-title-row"><div><h1>${statusLabel === "TODAY" ? "Today's Adventure" : "Next Adventure"}</h1></div><div class="hero-emblem" aria-hidden="true">🍁</div></div><div class="pixel-divider"></div>
       <p class="muted">${lead} Kyoto + Osaka • late autumn 2026</p>
